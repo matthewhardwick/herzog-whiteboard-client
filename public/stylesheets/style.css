@@ -123,3 +123,32 @@ html,body {
     background-color: #c4d3df;
     padding-bottom: 1px;
 }
+
+.table {
+    display: table;
+    width: 700px;
+}
+
+.tableHeader {
+    text-align: center;
+    background-color: #23689c;
+    border-bottom: solid 1px black;
+    padding: 3px;
+    font-size: 18px;
+    color: white;
+    display: table-row;
+}
+
+.table > * {
+    display: table-row;
+}
+
+.table > * > * {
+    display: table-cell;
+    text-align: center;
+    padding-bottom: 1px;
+}
+
+/*.table > * > form:nth-child(odd) {*/
+    /*background-color: #c4d3df;*/
+/*}*/

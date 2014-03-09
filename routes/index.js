@@ -49,6 +49,11 @@ exports.whiteboard = function(settings, scopeTypes) {
 exports.addscope = function () {
     return function (req, res) {
         var scope = new Scope(req.body);
+        scope.status.push({
+            assignment: req.body.assignment || "",
+            priority: req.body.priority || "",
+            updated: Date.now()
+        });
         scope.save(function(err) {
             if(err) {
                 console.log(err);
