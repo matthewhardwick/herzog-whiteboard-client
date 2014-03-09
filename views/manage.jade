@@ -1,0 +1,42 @@
+extends layout
+block content
+    h2(style="text-align: center;") Manage scopes
+    div(style="display: table;")
+        div(style="display: table-row;")
+            div(style="display: table-cell;") Serial
+            div(style="display: table-cell;") Hospital
+            div(style="display: table-cell;") Assignment
+            div(style="display: table-cell;") Delete
+        each item in viewModel.scopes
+            form(style="display: table-row;")
+                div(style="display: table-cell;")= item.serial
+                div(style="display: table-cell;")= item.hospital
+                form(action="/updatescope" method="post" style="display: table-cell;")
+                    input(type="hidden" name="serial" value=item.serial)
+                    select(name='assignment')
+                        each assignKey in Object.keys(viewModel.assignment)
+                            if (assignKey === item.assignment)
+                                option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
+                            else
+                                option(value=assignKey)= viewModel.assignment[assignKey]
+                    input(type="submit" value="Update")
+            form(action="/deletescope" method="post" style="display: table-row;")
+                input(type="hidden" name="serial" value=item.serial)
+                input(type="submit" value="delete")
+    h2(style="text-align: center;") Add a new scope
+    form(action="/addscope" method="post")
+        table(class="manageTable")
+            tr
+                th Serial
+                th Hospital
+                th Assignment
+            tr
+                td
+                    input(type="text" name="serial" style="width: 90%;")
+                td
+                    input(type="text" name="hospital" style="width: 90%;")
+                td
+                    select(name='assignment')
+                        each assignKey in Object.keys(viewModel.assignment)
+                            option(value=assignKey)= viewModel.assignment[assignKey]
+                    input(type="submit" value="Add Scope")

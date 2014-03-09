@@ -1,8 +1,125 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-flow: column;
 }
 
-a {
-  color: #00B7FF;
+.header {
+    flex: 60px 0 0;
+}
+
+.header img {
+    margin: 2.5px;
+}
+
+.header .nav {
+    float: right;
+    height: 100%;
+    display: table;
+    margin-right: 10px;
+}
+
+.header .nav .links {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content {
+    height: calc(100% - 60px);
+    flex: 1 0 0;
+}
+
+.flex-col {
+    display: flex;
+    flex-flow: column;
+}
+
+.border-left {
+    border-left: solid 1px black;
+}
+
+.flex-col-border {
+    border-right: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.flex-row {
+    display: flex;
+    display: -moz-flex;
+    -moz-flex-flow: row;
+    flex-flow: row;
+}
+
+.flex-item-single {
+    flex: 1 0 0;
+    -moz-flex: 1 0 0;
+}
+
+.flex-item-double {
+    flex: 2 0 0;
+    -moz-flex: 2 0 0;
+}
+
+.flex-item-triple {
+    flex: 3 0 0;
+    -moz-flex: 3 0 0;
+}
+
+.col-header {
+    text-align: center;
+    background-color: #23689c;
+    border-bottom: solid 1px black;
+    padding: 3px;
+    font-size: 18px;
+    color: white;
+}
+
+.col-body {
+    flex: 1 0 0;
+}
+
+.scope-item {
+    width: calc(100% - 8px);
+    height: auto;
+    background-color: #c4d3df;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.flex-wrap-wide > .scope-item {
+    width: calc(50% - 8px);
+}
+
+.flex-wrap-wide {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.manageTable {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.manageTable th {
+    width: 250px;
+    text-align: center;
+    background-color: #23689c;
+    border-bottom: solid 1px black;
+    padding: 3px;
+    font-size: 18px;
+    color: white;
+}
+
+.manageTable tr {
+    text-align: center;
+    background-color: #c4d3df;
+    padding-bottom: 1px;
 }
