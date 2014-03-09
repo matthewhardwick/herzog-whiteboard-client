@@ -94,13 +94,14 @@ exports.updatescope = function () {
                     if (!!req.body.assignment || !!req.body.priority)
                         doc.status.push({
                             assignment: doc.assignment,
-                            priority: doc.priority
+                            priority: doc.priority,
+                            updated: Date.now()
                         });
                     doc.save(function (err) {
                         if (err)
                             console.log(err);
                         else
-                            console.log("Item Updated");
+                            console.log(doc);
 
                         res.redirect('/manage');
 
@@ -108,17 +109,6 @@ exports.updatescope = function () {
                 }
             }
         );
-//        Scope.update({serial: req.body.serial},
-//            {assignment: req.body.assignment},
-//            {upsert: true},
-//            function(err) {
-//                if(err) {
-//                    console.log(err);
-//                } else {
-//                    console.log('Scope: ' + req.body.serial + " updated.");
-//                    res.redirect('/manage');
-//                }
-//            });
     }
 }
 

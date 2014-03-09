@@ -19,7 +19,14 @@ block content
                                 option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
                             else
                                 option(value=assignKey)= viewModel.assignment[assignKey]
-
+                form(action='/updatescope' method='post' style="table-cell;")
+                    input(type="hidden" name="serial" value=item.serial)
+                    select(name="priority" onchange="this.form.submit()")
+                        each level in Object.keys(viewModel.priorityLevel)
+                            if (level === item.priority)
+                                option(value=level selected="selected")= viewModel.priorityLevel[level]
+                            else
+                                option(value=level)= viewModel.priorityLevel[level]
     h2(style="text-align: center;") Add a new scope
     form(action="/addscope" method="post")
         table(class="manageTable")
