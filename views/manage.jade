@@ -8,21 +8,18 @@ block content
             div(style="display: table-cell;") Assignment
             div(style="display: table-cell;") Delete
         each item in viewModel.scopes
-            form(style="display: table-row;")
+            div(style="display: table-row")
                 div(style="display: table-cell;")= item.serial
                 div(style="display: table-cell;")= item.hospital
                 form(action="/updatescope" method="post" style="display: table-cell;")
                     input(type="hidden" name="serial" value=item.serial)
-                    select(name='assignment')
+                    select(name='assignment' onchange="this.form.submit()")
                         each assignKey in Object.keys(viewModel.assignment)
                             if (assignKey === item.assignment)
                                 option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
                             else
                                 option(value=assignKey)= viewModel.assignment[assignKey]
-                    input(type="submit" value="Update")
-            form(action="/deletescope" method="post" style="display: table-row;")
-                input(type="hidden" name="serial" value=item.serial)
-                input(type="submit" value="delete")
+
     h2(style="text-align: center;") Add a new scope
     form(action="/addscope" method="post")
         table(class="manageTable")

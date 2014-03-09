@@ -46,7 +46,7 @@ exports.whiteboard = function(settings, scopeTypes) {
     };
 };
 
-exports.addscope = function (boardTypes) {
+exports.addscope = function () {
     return function (req, res) {
         var scope = new Scope(req.body);
         scope.save(function(err) {
@@ -60,11 +60,12 @@ exports.addscope = function (boardTypes) {
     }
 };
 
-exports.manage = function (settings, boardTypes) {
+exports.manage = function (settings, boardTypes, priorityLevel) {
     return function (req, res) {
         var viewModel = {
             settings: settings,
-            assignment: boardTypes
+            assignment: boardTypes,
+            priorityLevel: priorityLevel
         }
         Scope.find({}, {}, function (e, docs) {
             viewModel.scopes = docs;
@@ -76,23 +77,52 @@ exports.manage = function (settings, boardTypes) {
     }
 }
 
-exports.updatescope = function (settings, boardTypes) {
+exports.updatescope = function () {
     return function (req, res) {
-        Scope.update({serial: req.body.serial},
-            {assignment: req.body.assignment},
-            {upsert: true},
-            function(err) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log('Scope: ' + req.body.serial + " updated.");
-                    res.redirect('/manage');
+        Scope.findOne({serial: req.body.serial}).exec(
+            function (err, doc) {
+                if (!!doc) {
+                    if (!!req.body.assignment)
+                        doc.assignment = req.body.assignment;
+                    if (!!req.body.priority)
+                        doc.priority = req.body.priority;
+                    if (!!req.body.serial)
+                        doc.serial = req.body.serial;
+                    if (!!req.body.hospital)
+                        doc.hospital = req.body.hospital;
+
+                    if (!!req.body.assignment || !!req.body.priority)
+                        doc.status.push({
+                            assignment: doc.assignment,
+                            priority: doc.priority
+                        });
+                    doc.save(function (err) {
+                        if (err)
+                            console.log(err);
+                        else
+                            console.log("Item Updated");
+
+                        res.redirect('/manage');
+
+                    })
                 }
-            });
+            }
+        );
+//        Scope.update({serial: req.body.serial},
+//            {assignment: req.body.assignment},
+//            {upsert: true},
+//            function(err) {
+//                if(err) {
+//                    console.log(err);
+//                } else {
+//                    console.log('Scope: ' + req.body.serial + " updated.");
+//                    res.redirect('/manage');
+//                }
+//            });
     }
 }
 
-exports.deletescope = function (boardTypes) {
+exports.deletescope = function () {
     return function (req, res) {
         Scope.findOne({serial: req.body.serial}, {}, function (e, docs) {
             docs.remove();

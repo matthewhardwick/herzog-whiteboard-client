@@ -12,6 +12,12 @@ var settings = {
     }
 }
 
+var priorityLevel = {
+    low : "Low",
+    norm: "Normal",
+    high: "High"
+};
+
 var boardTypes = {
     wfp: "Waiting For Parts",
     rfw: "Ready For Work",
@@ -25,6 +31,7 @@ var boardTypes = {
     emp3: settings.EmployeeNames.emp3,
     emp4: settings.EmployeeNames.emp4,
     emp5: settings.EmployeeNames.emp5,
+    na: "No Assignment"
 }
 
 var passport = require('passport');
@@ -34,10 +41,19 @@ var Schema   = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
+var scopeStatusSchema = new Schema({
+    assignment  : { type: String, required: true },
+    priority    : { type: String, required: true },
+    updated     : { type: Date, required: true, default: Date.now() }
+});
+
 var scopeSchema = new Schema({
     serial      : { type: String, required: true, unique: true },
-    hospital    : { type: String, required: true },
+    hospital    : { type: String },
     assignment  : { type: String, required: true },
+    priority    : { type: String, required: true },
+    status      : [ scopeSchema ],
+    date        : { type: Date, required: true, default: Date.now() }
 });
 
 var userSchema = new Schema({
@@ -76,6 +92,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
 var Scope = mongoose.model( 'Scope', scopeSchema );
 var User = mongoose.model( 'User', userSchema );
+var ScopeStatus = mongoose.model( 'ScopeStatus', scopeStatusSchema );
 
 
 /**
@@ -168,12 +185,12 @@ db.once('open', function callback() {
 app.get('/', ensureAuthenticated, routes.index);
 app.get('/login', routes.get_login);
 app.get('/whiteboard', ensureAuthenticated, routes.whiteboard(settings, boardTypes));
-app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes));
+app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel));
 
 app.post('/login', routes.post_login(passport));
-app.post('/addscope', ensureAuthenticated, routes.addscope(boardTypes));
-app.post('/updatescope', ensureAuthenticated, routes.updatescope(boardTypes));
-app.post('/deletescope', ensureAuthenticated, routes.deletescope(boardTypes));
+app.post('/addscope', ensureAuthenticated, routes.addscope());
+app.post('/updatescope', ensureAuthenticated, routes.updatescope());
+app.post('/deletescope', ensureAuthenticated, routes.deletescope());
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
