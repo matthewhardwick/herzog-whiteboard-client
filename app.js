@@ -1,7 +1,7 @@
 
 
 var settings = {
-    isDebug: true,
+    isDebug: false,
     isAdminMode: true,
     ShowCreditHold: true,
     EmployeeNames: {
