@@ -1,54 +1,60 @@
 extends layout
 block content
     div(style="margin-left: auto; margin-right: auto;")
-        h2(style="text-align: center;") Manage scopes
-        div.table
-            div.tableHeader
-                div Serial
-                div Hospital
-                div Assignment
-                div Delete
-            each item in viewModel.scopes
-                div
-                    div= item.serial
-                    div= item.hospital
-                    form(action="/updatescope" method="post")
-                        input(type="hidden" name="serial" value=item.serial)
-                        select(name='assignment' onchange="this.form.submit()")
-                            each assignKey in Object.keys(viewModel.assignment)
-                                if (assignKey === item.assignment)
-                                    option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
-                                else
-                                    option(value=assignKey)= viewModel.assignment[assignKey]
-                    form(action='/updatescope' method='post')
-                        input(type="hidden" name="serial" value=item.serial)
-                        select(name="priority" onchange="this.form.submit()")
-                            each level in Object.keys(viewModel.priorityLevel)
-                                if (level === item.priority)
-                                    option(value=level selected="selected")= viewModel.priorityLevel[level]
-                                else
-                                    option(value=level)= viewModel.priorityLevel[level]
-        if (!viewModel.inactive)
-            h2(style="text-align: center;") Add a new scope
+        if (viewModel.message)
+            div.sessionMessage= viewModel.message
+        div.tableContainer
+            h2.mainTableHeader Manage scopes
             div.table
-                div.tableHeader
+
+                div.subTableHeader
                     div Serial
                     div Hospital
                     div Assignment
-                    div Priority
+                    div Delete
+                each item in viewModel.scopes
                     div
-                form(action="/addscope" method="post")
-                    div
-                        input(type="text" name="serial" style="width: 90%;")
-                    div
-                        input(type="text" name="hospital" style="width: 90%;")
-                    div
-                        select(name='assignment')
-                            each assignKey in Object.keys(viewModel.assignment)
-                                option(value=assignKey)= viewModel.assignment[assignKey]
-                    div
-                        select(name="priority")
-                            each pri in Object.keys(viewModel.priorityLevel)
-                                option(value=pri)= viewModel.priorityLevel[pri]
-                    div
-                        input(type="submit" value="Add Scope")
+                        div
+                            a(href="/manage/scope/" + item.serial)=item.serial
+                        div= item.hospital
+                        form(action="/updatescope" method="post")
+                            input(type="hidden" name="serial" value=item.serial)
+                            select(name='assignment' onchange="this.form.submit()")
+                                each assignKey in Object.keys(viewModel.assignment)
+                                    if (assignKey === item.assignment)
+                                        option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
+                                    else
+                                        option(value=assignKey)= viewModel.assignment[assignKey]
+                        form(action='/updatescope' method='post')
+                            input(type="hidden" name="serial" value=item.serial)
+                            select(name="priority" onchange="this.form.submit()")
+                                each level in Object.keys(viewModel.priorityLevel)
+                                    if (level === item.priority)
+                                        option(value=level selected="selected")= viewModel.priorityLevel[level]
+                                    else
+                                        option(value=level)= viewModel.priorityLevel[level]
+        if (!viewModel.inactive)
+            div.tableContainer
+                h2.mainTableHeader Add a new scope
+                div.table
+                    div.subTableHeader
+                        div Serial
+                        div Hospital
+                        div Assignment
+                        div Priority
+                        div
+                    form(action="/addscope" method="post")
+                        div
+                            input(type="text" name="serial" style="width: 90%;")
+                        div
+                            input(type="text" name="hospital" style="width: 90%;")
+                        div
+                            select(name='assignment')
+                                each assignKey in Object.keys(viewModel.assignment)
+                                    option(value=assignKey)= viewModel.assignment[assignKey]
+                        div
+                            select(name="priority")
+                                each pri in Object.keys(viewModel.priorityLevel)
+                                    option(value=pri)= viewModel.priorityLevel[pri]
+                        div
+                            input(type="submit" value="Add Scope")

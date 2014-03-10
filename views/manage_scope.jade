@@ -1,0 +1,54 @@
+extends layout
+block content
+
+    - var scope = viewModel.scope;
+    div.tableContainer
+        h2.mainTableHeader Scope Information
+        form(method="post" action="/updatescope").table
+            div
+                div Serial
+                div
+                    input(type="text" name="new_serial" value=scope.serial)
+                    input(type="hidden" name="serial" value=scope.serial)
+            div
+                div Hospital
+                div
+                    input(type="text" name="hospital" value=scope.hospital)
+            div
+                div Current Assignment
+                div
+                    select(name='assignment')
+                        each assignKey in Object.keys(viewModel.boardTypes)
+                            if (assignKey === scope.assignment)
+                                option(value=assignKey selected="selected")= viewModel.boardTypes[assignKey]
+                            else
+                                option(value=assignKey)= viewModel.boardTypes[assignKey]
+            div
+                div Current Priority
+                div
+                    select(name="priority")
+                        each level in Object.keys(viewModel.priorityLevel)
+                            if (level === scope.priority)
+                                option(value=level selected="selected")= viewModel.priorityLevel[level]
+                            else
+                                option(value=level)= viewModel.priorityLevel[level]
+            div
+                div Date Added
+                div= scope.date
+            div.subTableHeader#updateSubmit
+                button(name="submit" value="Update Scope") Update Scope
+                div
+
+
+    div.tableContainer
+        h2.mainTableHeader Scope History
+        div.table
+            div.subTableHeader
+                div Assignment
+                div Priority
+                div Updated
+            each status in viewModel.scope.status
+                div
+                   div= viewModel.boardTypes[status.assignment]
+                   div= viewModel.priorityLevel[status.priority]
+                   div= status.updated_time

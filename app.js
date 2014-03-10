@@ -1,7 +1,7 @@
 
 
 var settings = {
-    isDebug: true,
+    isDebug: false,
     ShowCreditHold: true,
     EmployeeNames: {
         emp1: "Luis",
@@ -101,7 +101,6 @@ var ScopeStatus = mongoose.model( 'ScopeStatus', scopeStatusSchema );
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
@@ -112,13 +111,12 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-//app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
-app.use(express.session({ secret: 'keyboard cat' }));
+app.use(express.session({ secret: '37c5590beaf124698c13edb0f89f13498362411b64bf98b0a87811e4e3f4999b' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
@@ -187,11 +185,14 @@ app.get('/login', routes.get_login);
 app.get('/whiteboard', ensureAuthenticated, routes.whiteboard(settings, boardTypes, priorityLevel));
 app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, false));
 app.get('/manage/inactive', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, true));
+app.get('/manage/scope/:serial', ensureAuthenticated, routes.manage_scope(settings, boardTypes, priorityLevel));
+app.get('/logout', ensureAuthenticated, routes.get_logout);
 
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());
 app.post('/updatescope', ensureAuthenticated, routes.updatescope());
-app.post('/deletescope', ensureAuthenticated, routes.deletescope());
+//app.post('/deletescope', ensureAuthenticated, routes.deletescope());
+
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

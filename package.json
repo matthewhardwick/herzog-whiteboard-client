@@ -11,6 +11,7 @@
     "passport": "*",
     "passport-local": "*",
     "bcrypt": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "moment": "~2.5.1"
   }
 }

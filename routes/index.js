@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
+
 var Scope = mongoose.model('Scope');
 var User = mongoose.model('User');
 
@@ -24,9 +26,15 @@ exports.post_login = function (passport) {
 
 exports.get_login = function (req, res) {
     res.render('login', {
+        hideNav: true,
         user: req.user,
         message: req.session.messages
     });
+};
+
+exports.get_logout = function(req, res){
+    req.logout();
+    res.redirect('/');
 };
 
 exports.whiteboard = function(settings, boardTypes, priorityLevel) {
@@ -65,11 +73,11 @@ exports.addscope = function () {
         });
         scope.save(function(err) {
             if(err) {
-                console.log(err);
+                req.session.messages = "Unable to add " + req.body.serial;
             } else {
-                console.log('Scope: ' + scope.serial + " saved.");
-                res.redirect('/manage');
+                req.session.messages = req.body.serial + " Sucessfully Added";
             }
+            res.redirect('/manage');
         });
     }
 };
@@ -80,12 +88,14 @@ exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
             settings: settings,
             assignment: boardTypes,
             priorityLevel: priorityLevel,
-            inactive: inactive
+            inactive: inactive,
+            message: req.session.messages
         }
+        req.session.messages = "";
         if (!inactive)
             Scope.find({assignment: {$ne: 'na'}}, {}, function (e, docs) {
                 viewModel.scopes = docs;
-                sortByKey(viewModel.scopes, "assignment");
+                sortByKey(viewModel.scopes, "serial");
                 res.render('manage', {
                     'viewModel': viewModel
                 })
@@ -93,7 +103,7 @@ exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
         else
             Scope.find({assignment: "na" }, {}, function (e, docs) {
                 viewModel.scopes = docs;
-                sortByKey(viewModel.scopes, "assignment");
+                sortByKey(viewModel.scopes, "serial");
                 res.render('manage', {
                     'viewModel': viewModel
                 })
@@ -110,7 +120,9 @@ exports.updatescope = function () {
                         doc.assignment = req.body.assignment;
                     if (!!req.body.priority)
                         doc.priority = req.body.priority;
-                    if (!!req.body.serial)
+                    if (!!req.body.new_serial)
+                        doc.serial = req.body.new_serial;
+                    else if (!!req.body.serial)
                         doc.serial = req.body.serial;
                     if (!!req.body.hospital)
                         doc.hospital = req.body.hospital;
@@ -122,10 +134,13 @@ exports.updatescope = function () {
                             updated: Date.now()
                         });
                     doc.save(function (err) {
-                        if (err)
+                        if (err) {
                             console.log(err);
-                        else
+                            req.session.messages = "Unable to update " + doc.serial;
+                        } else {
                             console.log(doc);
+                            req.session.messages = doc.serial + " Sucessfully Updated";
+                        }
 
                         res.redirect('/manage');
 
@@ -136,11 +151,31 @@ exports.updatescope = function () {
     }
 }
 
-exports.deletescope = function () {
+exports.manage_scope = function(settings, boardTypes, priorityLevel) {
     return function (req, res) {
-        Scope.findOne({serial: req.body.serial}, {}, function (e, docs) {
-            docs.remove();
-            res.redirect('/manage');
+        Scope.findOne({serial: req.params.serial}, {}, function (err, docs) {
+            if (!!docs) {
+                var viewModel =  {
+                  settings      : settings,
+                  boardTypes    : boardTypes,
+                  priorityLevel : priorityLevel,
+                  scope         : docs,
+                  message       : req.session.messages
+                };
+                for (var idx in viewModel.scope.status) {
+                    if (!!viewModel.scope.status[idx].updated) {
+                        var date = new Date(viewModel.scope.status[idx].updated);
+                        viewModel.scope.status[idx].updated_time = date;
+                    }
+                }
+                req.session.messages = "";
+                res.render('manage_scope', {
+                    'viewModel': viewModel
+                });
+            } else {
+                req.session.messages = "Unable to Find Scope: " + req.params.serial;
+                res.redirect('/manage');
+            }
         });
     }
 }

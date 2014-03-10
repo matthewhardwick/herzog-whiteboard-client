@@ -183,21 +183,76 @@ html,body {
     flex-flow: column wrap;
 }
 
-.table {
-    display: table;
+/*.table {*/
+    /*display: table;*/
+    /*width: 700px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+/*}*/
+
+/*.tableHeader {*/
+    /*text-align: center;*/
+    /*background-color: #23689c;*/
+    /*border-bottom: solid 1px black;*/
+    /*padding: 3px;*/
+    /*font-size: 14px;*/
+    /*color: white;*/
+    /*display: table-row;*/
+/*}*/
+
+/*.table > * {*/
+    /*display: table-row;*/
+/*}*/
+
+/*.table > *:nth-child(even) {*/
+    /*background-color: #c4d3df;*/
+/*}*/
+
+/*.table > * > * {*/
+    /*display: table-cell;*/
+    /*text-align: center;*/
+    /*padding-bottom: 1px;*/
+/*}*/
+
+
+.tableContainer {
     width: 700px;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
 }
 
-.tableHeader {
-    text-align: center;
+.table {
+    display: table;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.mainTableHeader {
     background-color: #23689c;
-    border-bottom: solid 1px black;
-    padding: 3px;
-    font-size: 14px;
+    margin-bottom: 0;
+    padding: 5px;
     color: white;
-    display: table-row;
+
+}
+
+.table .subTableHeader#updateSubmit {
+    background-color: #4F86B0;
+}
+
+.table .subTableHeader {
+    text-align: center;
+    background-color: #4F86B0;
+    border-bottom: solid 1px black;
+    font-size: 18px;
+    color: white;
+    width: 100%;
+    margin-left: 0;
+
+}
+
+.table > *:nth-child(even) {
+    background-color: #c4d3df;
 }
 
 .table > * {
@@ -205,7 +260,25 @@ html,body {
 }
 
 .table > * > * {
+    padding-left: 15px;
+    padding-right: 15px;
     display: table-cell;
+    margin-left: 10px;
+    padding-bottom: 2px;
+    padding-top: 2px;
     text-align: center;
-    padding-bottom: 1px;
+}
+
+.sessionMessage {
+    white-space: nowrap;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: lightgoldenrodyellow;
+    padding: 5px;
+    border: black 1px solid;
 }
