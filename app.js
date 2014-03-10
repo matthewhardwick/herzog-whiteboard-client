@@ -112,7 +112,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
+//app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -184,7 +184,7 @@ db.once('open', function callback() {
 // Routing Information
 app.get('/', ensureAuthenticated, routes.index);
 app.get('/login', routes.get_login);
-app.get('/whiteboard', ensureAuthenticated, routes.whiteboard(settings, boardTypes));
+app.get('/whiteboard', ensureAuthenticated, routes.whiteboard(settings, boardTypes, priorityLevel));
 app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel));
 
 app.post('/login', routes.post_login(passport));

@@ -29,16 +29,25 @@ exports.get_login = function (req, res) {
     });
 };
 
-exports.whiteboard = function(settings, scopeTypes) {
+exports.whiteboard = function(settings, boardTypes, priorityLevel) {
     return function(req, res) {
-        var viewModel = {settings: settings};
-        for (var idx in scopeTypes)
+        var viewModel = {
+            settings: settings,
+            boardTypes: boardTypes
+        };
+
+        for (var idx in boardTypes)
             viewModel[idx] = [];
+
         Scope.find({}, {}, function(e, docs) {
-            for (var idx in docs) {
+
+            for (var idx in docs)
                 if (!!viewModel[docs[idx].assignment])
                     viewModel[docs[idx].assignment].push(docs[idx])
-            }
+
+            for (var key in boardTypes)
+                sortByPriority(viewModel[key], priorityLevel)
+
             res.render('whiteboard', {
                 "viewModel": viewModel
             });
@@ -134,3 +143,19 @@ function sortByKey(array, key) {
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
 };
+
+function sortByPriority(array, priorityLevel) {
+    return array.sort(function (a, b) {
+        var pri1 = a.priority;
+        var pri2 = b.priority;
+        if (pri1 === "high")
+            return -1;
+        else if (pri2 === "high")
+            return 1;
+        else if (pri1 === "norm")
+            return -1;
+        else if (pri2 === "norm")
+            return 1
+        return 0;
+    });
+}
