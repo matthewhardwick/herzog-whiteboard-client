@@ -4,4 +4,15 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+      div
+          div#navBar
+            img.logo(src='images/HerzogLogoShadow.png')
+            br
+            a(href='/whiteboard') Whiteboard
+            a(href='/manage') Manage
+            a(href='/manage/inactive') Inactive Scopes
+            a(href='/manage/users') Manage Users
+            a(href='/logout') Logout
+
+          div#content
+            block content

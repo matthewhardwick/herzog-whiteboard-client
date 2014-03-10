@@ -1,122 +1,128 @@
-extends layout
-block content
-    div.flex-col(style="height: 100%")
-        div.flex-row.flex-item-single
-            div.flex-col.flex-item-single.border-left
-                div.col-header#emp1= viewModel.boardTypes.emp1
-                div.col-body
-                    each item in viewModel.emp1
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-            div.flex-col.flex-item-single.border-left
-                div.col-header#emp2= viewModel.boardTypes.emp2
-                div.col-body
-                    each item in viewModel.emp2
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-            div.flex-col.flex-item-single.border-left
-                div.col-header#emp3= viewModel.boardTypes.emp3
-                div.col-body
-                    each item in viewModel.emp3
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-            div.flex-col.flex-item-single.border-left
-                div.col-header#emp4= viewModel.boardTypes.emp4
-                div.col-body
-                    each item in viewModel.emp4
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-            div.flex-col.flex-item-single.border-left
-                div.col-header#emp5= viewModel.boardTypes.emp5
-                div.col-body
-                    each item in viewModel.emp5
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-        div.flex-row.flex-item-triple
-            div.flex-col.flex-item-double
-                div.flex-col.flex-item-single
-                    div#wfp.flex-col.flex-item-double
-                        div.col-header= viewModel.boardTypes.wfp
-                        div.col-body.flex-wrap-wide
-                            each item in viewModel.wfp
-                                div.scope-item
-                                    div.priority(class=item.priority)
-                                    div.text-block
-                                        div.serial=item.serial
-                                        div.hospital=item.hospital
-                        div.flex-row.flex-item-single
-                            div#loaners.flex-col.flex-item-single
-                                div.col-header= viewModel.boardTypes.loaners
-                                - var loanerClass = "";
-                                if (!viewModel.settings.ShowCreditHold)
-                                    - loanerClass = "flex-wrap-wide";
-                                div.col-body(class=loanerClass)
-                                    each item in viewModel.loaners
-                                        div.scope-item
-                                            div.priority(class=item.priority)
-                                            div.text-block
-                                                div.serial=item.serial
-                                                div.hospital=item.hospital
-                            if (viewModel.settings.ShowCreditHold)
-                                div#credithold.flex-col.flex-item-single.border-left
-                                    div.col-header= viewModel.boardTypes.credithold
-                                    div.col-body
-                                        each item in viewModel.credithold
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        block content
+            div.whiteboard
+                div.flex-col(style="height: 100%")
+                    div.flex-row.flex-item-single
+                        div.flex-col.flex-item-single.border-left
+                            div.col-header#emp1= viewModel.boardTypes.emp1
+                            div.col-body
+                                each item in viewModel.emp1
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                        div.flex-col.flex-item-single.border-left
+                            div.col-header#emp2= viewModel.boardTypes.emp2
+                            div.col-body
+                                each item in viewModel.emp2
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                        div.flex-col.flex-item-single.border-left
+                            div.col-header#emp3= viewModel.boardTypes.emp3
+                            div.col-body
+                                each item in viewModel.emp3
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                        div.flex-col.flex-item-single.border-left
+                            div.col-header#emp4= viewModel.boardTypes.emp4
+                            div.col-body
+                                each item in viewModel.emp4
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                        div.flex-col.flex-item-single.border-left
+                            div.col-header#emp5= viewModel.boardTypes.emp5
+                            div.col-body
+                                each item in viewModel.emp5
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                    div.flex-row.flex-item-triple
+                        div.flex-col.flex-item-double
+                            div.flex-col.flex-item-single
+                                div#wfp.flex-col.flex-item-double
+                                    div.col-header= viewModel.boardTypes.wfp
+                                    div.col-body.flex-wrap-wide
+                                        each item in viewModel.wfp
                                             div.scope-item
                                                 div.priority(class=item.priority)
                                                 div.text-block
                                                     div.serial=item.serial
                                                     div.hospital=item.hospital
+                                    div.flex-row.flex-item-single
+                                        div#loaners.flex-col.flex-item-single
+                                            div.col-header= viewModel.boardTypes.loaners
+                                            - var loanerClass = "";
+                                            if (!viewModel.settings.ShowCreditHold)
+                                                - loanerClass = "flex-wrap-wide";
+                                            div.col-body(class=loanerClass)
+                                                each item in viewModel.loaners
+                                                    div.scope-item
+                                                        div.priority(class=item.priority)
+                                                        div.text-block
+                                                            div.serial=item.serial
+                                                            div.hospital=item.hospital
+                                        if (viewModel.settings.ShowCreditHold)
+                                            div#credithold.flex-col.flex-item-single.border-left
+                                                div.col-header= viewModel.boardTypes.credithold
+                                                div.col-body
+                                                    each item in viewModel.credithold
+                                                        div.scope-item
+                                                            div.priority(class=item.priority)
+                                                            div.text-block
+                                                                div.serial=item.serial
+                                                                div.hospital=item.hospital
 
-            div#rfw.flex-col.flex-item-single.border-left
-                div.col-header= viewModel.boardTypes.rfw
-                div.col-body
-                    each item in viewModel.rfw
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
-            div.flex-col.flex-item-single.border-left
-                div#pr.flex-col.flex-item-double
-                    div.col-header= viewModel.boardTypes.pr
-                    div.col-body
-                        each item in viewModel.pr
-                            div.scope-item
-                                div.priority(class=item.priority)
-                                div.text-block
-                                    div.serial=item.serial
-                                    div.hospital=item.hospital
-                div#disassemble.flex-col.flex-item-double
-                    div.col-header= viewModel.boardTypes.disassemble
-                    div.col-body
-                        each item in viewModel.disassemble
-                            div.scope-item
-                                div.priority(class=item.priority)
-                                div.text-block
-                                    div.serial=item.serial
-                                    div.hospital=item.hospital
-            div#an.flex-col.flex-item-single.border-left
-                div.col-header= viewModel.boardTypes.an
-                div.col-body
-                    each item in viewModel.an
-                        div.scope-item
-                            div.priority(class=item.priority)
-                            div.text-block
-                                div.serial=item.serial
-                                div.hospital=item.hospital
+                        div#rfw.flex-col.flex-item-single.border-left
+                            div.col-header= viewModel.boardTypes.rfw
+                            div.col-body
+                                each item in viewModel.rfw
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital
+                        div.flex-col.flex-item-single.border-left
+                            div#pr.flex-col.flex-item-double
+                                div.col-header= viewModel.boardTypes.pr
+                                div.col-body
+                                    each item in viewModel.pr
+                                        div.scope-item
+                                            div.priority(class=item.priority)
+                                            div.text-block
+                                                div.serial=item.serial
+                                                div.hospital=item.hospital
+                            div#disassemble.flex-col.flex-item-double
+                                div.col-header= viewModel.boardTypes.disassemble
+                                div.col-body
+                                    each item in viewModel.disassemble
+                                        div.scope-item
+                                            div.priority(class=item.priority)
+                                            div.text-block
+                                                div.serial=item.serial
+                                                div.hospital=item.hospital
+                        div#an.flex-col.flex-item-single.border-left
+                            div.col-header= viewModel.boardTypes.an
+                            div.col-body
+                                each item in viewModel.an
+                                    div.scope-item
+                                        div.priority(class=item.priority)
+                                        div.text-block
+                                            div.serial=item.serial
+                                            div.hospital=item.hospital

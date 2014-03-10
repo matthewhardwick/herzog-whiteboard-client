@@ -18,33 +18,69 @@ html,body {
     width: 100%;
     margin: 0;
     font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-    display: flex;
-    flex-flow: column;
 }
 
-.header {
-    flex: 60px 0 0;
+/*.header {*/
+    /*flex: 60px 0 0;*/
+/*}*/
+
+/*.header img {*/
+    /*margin: 2.5px;*/
+/*}*/
+
+/*.header .nav {*/
+    /*float: right;*/
+    /*height: 100%;*/
+    /*display: table;*/
+    /*margin-right: 10px;*/
+/*}*/
+
+/*.header .nav .links {*/
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/
+/*}*/
+
+#navBar {
+    background-color: ghostwhite;
+    width: 220px;
+    float: left;
+    height: 100vh;
+    display: inline-block;
+    position: fixed;
 }
 
-.header img {
-    margin: 2.5px;
+#content {
+    width: calc( 100% - 220px );
+    display: inline-block;
+    margin-left: 220px;
 }
 
-.header .nav {
-    float: right;
-    height: 100%;
-    display: table;
-    margin-right: 10px;
+#navBar .logo {
+    width: 200px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
-.header .nav .links {
-    display: table-cell;
-    vertical-align: middle;
+#navBar a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    color: #23689c;
+    margin-top: 10px;
 }
 
 .content {
     height: calc(100% - 60px);
     flex: 1 0 0;
+}
+
+.whiteboard {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
 }
 
 .flex-col {
@@ -150,6 +186,8 @@ html,body {
 .table {
     display: table;
     width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tableHeader {
