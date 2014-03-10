@@ -74,20 +74,30 @@ exports.addscope = function () {
     }
 };
 
-exports.manage = function (settings, boardTypes, priorityLevel) {
+exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
     return function (req, res) {
         var viewModel = {
             settings: settings,
             assignment: boardTypes,
-            priorityLevel: priorityLevel
+            priorityLevel: priorityLevel,
+            inactive: inactive
         }
-        Scope.find({}, {}, function (e, docs) {
-            viewModel.scopes = docs;
-            sortByKey(viewModel.scopes, "assignment");
-            res.render('manage', {
-                'viewModel': viewModel
-            })
-        });
+        if (!inactive)
+            Scope.find({assignment: {$ne: 'na'}}, {}, function (e, docs) {
+                viewModel.scopes = docs;
+                sortByKey(viewModel.scopes, "assignment");
+                res.render('manage', {
+                    'viewModel': viewModel
+                })
+            });
+        else
+            Scope.find({assignment: "na" }, {}, function (e, docs) {
+                viewModel.scopes = docs;
+                sortByKey(viewModel.scopes, "assignment");
+                res.render('manage', {
+                    'viewModel': viewModel
+                })
+            });
     }
 }
 

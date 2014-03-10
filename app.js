@@ -31,7 +31,7 @@ var boardTypes = {
     emp3: settings.EmployeeNames.emp3,
     emp4: settings.EmployeeNames.emp4,
     emp5: settings.EmployeeNames.emp5,
-    na: "No Assignment"
+    na: "Inactive"
 }
 
 var passport = require('passport');
@@ -185,7 +185,8 @@ db.once('open', function callback() {
 app.get('/', ensureAuthenticated, routes.index);
 app.get('/login', routes.get_login);
 app.get('/whiteboard', ensureAuthenticated, routes.whiteboard(settings, boardTypes, priorityLevel));
-app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel));
+app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, false));
+app.get('/manage/inactive', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, true));
 
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());

@@ -28,26 +28,27 @@ block content
                                     option(value=level selected="selected")= viewModel.priorityLevel[level]
                                 else
                                     option(value=level)= viewModel.priorityLevel[level]
-        h2(style="text-align: center;") Add a new scope
-        div.table
-            div.tableHeader
-                div Serial
-                div Hospital
-                div Assignment
-                div Priority
-                div
-            form(action="/addscope" method="post")
-                div
-                    input(type="text" name="serial" style="width: 90%;")
-                div
-                    input(type="text" name="hospital" style="width: 90%;")
-                div
-                    select(name='assignment')
-                        each assignKey in Object.keys(viewModel.assignment)
-                            option(value=assignKey)= viewModel.assignment[assignKey]
-                div
-                    select(name="priority")
-                        each pri in Object.keys(viewModel.priorityLevel)
-                            option(value=pri)= viewModel.priorityLevel[pri]
-                div
-                    input(type="submit" value="Add Scope")
+        if (!viewModel.inactive)
+            h2(style="text-align: center;") Add a new scope
+            div.table
+                div.tableHeader
+                    div Serial
+                    div Hospital
+                    div Assignment
+                    div Priority
+                    div
+                form(action="/addscope" method="post")
+                    div
+                        input(type="text" name="serial" style="width: 90%;")
+                    div
+                        input(type="text" name="hospital" style="width: 90%;")
+                    div
+                        select(name='assignment')
+                            each assignKey in Object.keys(viewModel.assignment)
+                                option(value=assignKey)= viewModel.assignment[assignKey]
+                    div
+                        select(name="priority")
+                            each pri in Object.keys(viewModel.priorityLevel)
+                                option(value=pri)= viewModel.priorityLevel[pri]
+                    div
+                        input(type="submit" value="Add Scope")
