@@ -12,7 +12,8 @@ html
                 a(href='/whiteboard') Whiteboard
                 a(href='/manage') Manage
                 a(href='/manage/inactive') Inactive Scopes
-                a(href='/manage/users') Manage Users
+                - if (!!viewModel && !!viewModel.settings && !!viewModel.settings.isAdminMode)
+                    a(href='/adduser') Add User
                 a(href='/logout') Logout
 
           div#content

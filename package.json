@@ -12,6 +12,10 @@
     "passport-local": "*",
     "bcrypt": "*",
     "mongoose": "*",
-    "moment": "~2.5.1"
-  }
+    "moment": "~2.5.1",
+    "logfmt": "~0.21.0"
+  },
+    "engines": {
+        "node": "0.10.x"
+    }
 }

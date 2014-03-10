@@ -24,6 +24,44 @@ exports.post_login = function (passport) {
     };
 };
 
+exports.post_adduser = function (settings) {
+    return function (req, res) {
+        if (!!req.body.username && !!req.body.password && !!req.body.email && settings.isAdminMode) {
+            var user = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
+            });
+            user.save(function(err) {
+                if(err) {
+                    console.log(err);
+                    req.session.messages = 'Unable to create user: ' + user.username;
+                } else {
+                    console.log('user: ' + user.username + " saved.");
+                    req.session.messages = 'user: ' + user.username + ' saved.';
+                }
+                res.redirect('/manage');
+            });
+        } else {
+            req.session.messages = "Either not all fields are filled out, or not Admin.";
+            res.redirect('/manage');
+        }
+
+    };
+};
+
+exports.get_adduser = function (settings) {
+    return function(req, res) {
+        if (settings.isAdminMode) {
+            res.render('adduser', {});
+        } else {
+            req.session.messages = "Not Admin.";
+            res.redirect('/manage');
+        }
+    };
+};
+
+
 exports.get_login = function (req, res) {
     res.render('login', {
         hideNav: true,

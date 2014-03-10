@@ -1,7 +1,8 @@
 
 
 var settings = {
-    isDebug: false,
+    isDebug: true,
+    isAdminMode: true,
     ShowCreditHold: true,
     EmployeeNames: {
         emp1: "Luis",
@@ -128,18 +129,11 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/herzogdb';
 
-
-mongoose.connect( 'mongodb://localhost/herzogdb' );
-
-var user = new User({ username: 'bob', email: 'bob@example.com', password: 'secret' });
-user.save(function(err) {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log('user: ' + user.username + " saved.");
-    }
-});
+mongoose.connect( mongoUri );
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -187,7 +181,11 @@ app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, prio
 app.get('/manage/inactive', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, true));
 app.get('/manage/scope/:serial', ensureAuthenticated, routes.manage_scope(settings, boardTypes, priorityLevel));
 app.get('/logout', ensureAuthenticated, routes.get_logout);
+//app.get('/updatepassword', ensureAuthenticated, routes.get_updatepassword(passport));
+app.get('/adduser', ensureAuthenticated, routes.get_adduser(settings));
 
+app.post('/adduser', ensureAuthenticated, routes.post_adduser(settings));
+//app.post('/updatepassword', routes.post_updatepassword(passport));
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());
 app.post('/updatescope', ensureAuthenticated, routes.updatescope());
