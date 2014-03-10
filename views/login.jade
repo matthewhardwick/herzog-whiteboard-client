@@ -2,13 +2,16 @@ extends layout
 block content
 
 
-    div
-        form(method="post" action="/login")
-            div
+    div(style="width: 400px; margin: auto;")
+        h2.mainTableHeader Login
+        form(method="post" action="/login").table
+            div.loginRow
                 label Login
                 input(type="text" name="username")
-            div
+
+            div.loginRow
                 label Password
                 input(type="password" name="password")
-            div
-                input(type="submit" value="Login")
+            div.loginRow
+                input.button(type="submit" value="Login")
+                div

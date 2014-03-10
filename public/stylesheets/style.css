@@ -282,3 +282,18 @@ html,body {
     padding: 5px;
     border: black 1px solid;
 }
+
+.table .loginRow {
+    background-color: #c4d3df;
+    text-align: left;
+}
+
+.table .loginRow > input {
+    width: 200px;
+    text-align: left;
+}
+
+.table .loginRow > .button {
+    width: 100px;
+    text-align: center;
+}

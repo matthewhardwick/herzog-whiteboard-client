@@ -1,15 +1,19 @@
 extends layout
 block content
     div
-        form(method="post" action="/adduser")
-            div
+
+    div(style="width: 400px; margin: auto;")
+        h2.mainTableHeader Add a new user
+        form(method="post" action="/adduser").table
+            div.loginRow
                 label Login
                 input(type="text" name="username")
-            div
+            div.loginRow
                 label Password
                 input(type="password" name="password")
-            div
+            div.loginRow
                 label Email
                 input(type="email" name="email")
-            div
-                input(type="submit" value="Login")
+            div.loginRow
+                input.button(type="submit" value="Add User")
+                div
