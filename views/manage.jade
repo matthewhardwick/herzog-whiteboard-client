@@ -11,7 +11,7 @@ block content
                     div Serial
                     div Hospital
                     div Assignment
-                    div Delete
+                    div Priority
                 each item in viewModel.scopes
                     div
                         div
@@ -34,27 +34,34 @@ block content
                                     else
                                         option(value=level)= viewModel.priorityLevel[level]
         if (!viewModel.inactive)
-            div.tableContainer
+            div(style="width: 400px; margin: auto; margin-bottom: 25px;")
                 h2.mainTableHeader Add a new scope
-                div.table
-                    div.subTableHeader
-                        div Serial
-                        div Hospital
-                        div Assignment
-                        div Priority
-                        div
-                    form(action="/addscope" method="post")
-                        div
-                            input(type="text" name="serial" style="width: 90%;")
-                        div
-                            input(type="text" name="hospital" style="width: 90%;")
-                        div
-                            select(name='assignment')
-                                each assignKey in Object.keys(viewModel.assignment)
-                                    option(value=assignKey)= viewModel.assignment[assignKey]
-                        div
-                            select(name="priority")
-                                each pri in Object.keys(viewModel.priorityLevel)
+                form(method="post" action="/addscope").table
+                    div.loginRow
+                        label Serial
+                        input(type="text" name="serial")
+                    div.loginRow
+                        label Hospital
+                        input(type="text" name="hospital")
+                    div.loginRow
+                        label RMA
+                        input(type="text" name="rma")
+                    div.loginRow
+                        label Client
+                        input(type="text" name="client")
+                    div.loginRow
+                        label Assignment
+                        select(name='assignment')
+                            each assignKey in Object.keys(viewModel.assignment)
+                                option(value=assignKey)= viewModel.assignment[assignKey]
+                    div.loginRow
+                        label Priority
+                        select(name="priority")
+                            each pri in Object.keys(viewModel.priorityLevel)
+                                if (pri === "norm")
+                                    option(value=pri selected='selected')= viewModel.priorityLevel[pri]
+                                else
                                     option(value=pri)= viewModel.priorityLevel[pri]
+                    div.loginRow
+                        input.button(type="submit" value="Add Scope")
                         div
-                            input(type="submit" value="Add Scope")

@@ -1,7 +1,7 @@
 
 /* Priority Scope Colors */
 .scope-item .priority.norm {
-    background-color: yellow;
+    background-color: green;
 }
 
 .scope-item .priority.high {
@@ -9,7 +9,7 @@
 }
 
 .scope-item .priority.low {
-    background-color: lightgreen;
+    background-color: dodgerblue;
 }
 
 /* App Styles Beging */
@@ -134,10 +134,9 @@ html,body {
 }
 
 .scope-item {
-    width: calc(100% - 8px);
+    width: calc(50% - 4px);
     height: 28px;
-    background-color: #c4d3df;
-    /*text-align: center;*/
+    background-color: #F5F5F5;
     color: black;
     padding-top: 1px;
     padding-bottom: 1px;
@@ -147,7 +146,7 @@ html,body {
 }
 
 .flex-wrap-wide > .scope-item {
-    width: calc(50% - 8px);
+    width: calc(25% - 4px);
 
 }
 
@@ -156,6 +155,7 @@ html,body {
     margin-left: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
+    width: calc(100% - 18px);
 }
 .scope-item .serial {
     font-size: 12px;
@@ -181,38 +181,8 @@ html,body {
 .flex-wrap-wide {
     display: flex;
     flex-flow: column wrap;
+    align-content: flex-start;
 }
-
-/*.table {*/
-    /*display: table;*/
-    /*width: 700px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-/*}*/
-
-/*.tableHeader {*/
-    /*text-align: center;*/
-    /*background-color: #23689c;*/
-    /*border-bottom: solid 1px black;*/
-    /*padding: 3px;*/
-    /*font-size: 14px;*/
-    /*color: white;*/
-    /*display: table-row;*/
-/*}*/
-
-/*.table > * {*/
-    /*display: table-row;*/
-/*}*/
-
-/*.table > *:nth-child(even) {*/
-    /*background-color: #c4d3df;*/
-/*}*/
-
-/*.table > * > * {*/
-    /*display: table-cell;*/
-    /*text-align: center;*/
-    /*padding-bottom: 1px;*/
-/*}*/
 
 
 .tableContainer {

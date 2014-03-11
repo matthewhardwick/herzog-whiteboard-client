@@ -15,6 +15,14 @@ block content
                 div
                     input(type="text" name="hospital" value=scope.hospital)
             div
+                div RMA
+                div
+                    input(type="text" name="rma" value=scope.rma)
+            div
+                div Client
+                div
+                    input(type="text" name="client" value=scope.client)
+            div
                 div Current Assignment
                 div
                     select(name='assignment')
@@ -44,11 +52,19 @@ block content
         h2.mainTableHeader Scope History
         div.table
             div.subTableHeader
+                div Serial
+                div Hospital
+                div RMA
+                div Client
                 div Assignment
                 div Priority
                 div Updated
             each status in viewModel.scope.status
                 div
+                   div= status.serial
+                   div= status.hospital
+                   div= status.rma
+                   div= status.client
                    div= viewModel.boardTypes[status.assignment]
                    div= viewModel.priorityLevel[status.priority]
                    div= status.updated_time

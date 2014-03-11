@@ -105,9 +105,13 @@ exports.addscope = function () {
     return function (req, res) {
         var scope = new Scope(req.body);
         scope.status.push({
-            assignment: req.body.assignment || "",
-            priority: req.body.priority || "",
-            updated: Date.now()
+            hospital    : req.body.hospital || "",
+            serial      : req.body.serial || "",
+            rma         : req.body.rma || "",
+            client      : req.body.client || "",
+            assignment  : req.body.assignment || "",
+            priority    : req.body.priority || "",
+            updated     : Date.now()
         });
         scope.save(function(err) {
             if(err) {
@@ -154,23 +158,25 @@ exports.updatescope = function () {
         Scope.findOne({serial: req.body.serial}).exec(
             function (err, doc) {
                 if (!!doc) {
-                    if (!!req.body.assignment)
-                        doc.assignment = req.body.assignment;
-                    if (!!req.body.priority)
-                        doc.priority = req.body.priority;
+                    doc.assignment = req.body.assignment || "";
+                    doc.priority = req.body.priority || "";
+                    doc.hospital = req.body.hospital || "";
+                    doc.rma = req.body.rma || "";
+                    doc.client = req.body.client || "";
                     if (!!req.body.new_serial)
                         doc.serial = req.body.new_serial;
                     else if (!!req.body.serial)
                         doc.serial = req.body.serial;
-                    if (!!req.body.hospital)
-                        doc.hospital = req.body.hospital;
-
-                    if (!!req.body.assignment || !!req.body.priority)
-                        doc.status.push({
-                            assignment: doc.assignment,
-                            priority: doc.priority,
-                            updated: Date.now()
-                        });
+                        
+                    doc.status.push({
+                        hospital    : doc.hospital || "",
+                        serial      : doc.serial || "",
+                        rma         : doc.rma || "",
+                        client      : doc.client || "",
+                        assignment  : doc.assignment || "",
+                        priority    : doc.priority || "",
+                        updated     : Date.now()
+                    });
                     doc.save(function (err) {
                         if (err) {
                             console.log(err);
@@ -203,7 +209,7 @@ exports.manage_scope = function(settings, boardTypes, priorityLevel) {
                 for (var idx in viewModel.scope.status) {
                     if (!!viewModel.scope.status[idx].updated) {
                         var date = new Date(viewModel.scope.status[idx].updated);
-                        viewModel.scope.status[idx].updated_time = date;
+                        viewModel.scope.status[idx].updated_time = moment(date).format("MMM-D-YYYY, h:mm a");
                     }
                 }
                 req.session.messages = "";

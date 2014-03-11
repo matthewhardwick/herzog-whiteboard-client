@@ -7,9 +7,9 @@ var settings = {
     EmployeeNames: {
         emp1: "Luis",
         emp2: "Jeremy #2",
-        emp3: "Other 1",
+        emp3: "Dan",
         emp4: "Jeremy #1",
-        emp5: "Other 2 / QC"
+        emp5: "Emily / QC"
     }
 }
 
@@ -43,6 +43,10 @@ var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
 var scopeStatusSchema = new Schema({
+    serial      : { type: String },
+    hospital    : { type: String },
+    rma         : { type: String },
+    client      : { type: String },
     assignment  : { type: String, required: true },
     priority    : { type: String, required: true },
     updated     : { type: Date, required: true, default: Date.now() }
@@ -51,6 +55,8 @@ var scopeStatusSchema = new Schema({
 var scopeSchema = new Schema({
     serial      : { type: String, required: true, unique: true },
     hospital    : { type: String },
+    rma         : { type: String },
+    client      : { type: String },
     assignment  : { type: String, required: true },
     priority    : { type: String, required: true },
     status      : [ scopeSchema ],
@@ -181,15 +187,12 @@ app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, prio
 app.get('/manage/inactive', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, true));
 app.get('/manage/scope/:serial', ensureAuthenticated, routes.manage_scope(settings, boardTypes, priorityLevel));
 app.get('/logout', ensureAuthenticated, routes.get_logout);
-//app.get('/updatepassword', ensureAuthenticated, routes.get_updatepassword(passport));
 app.get('/adduser', ensureAuthenticated, routes.get_adduser(settings));
 
 app.post('/adduser', ensureAuthenticated, routes.post_adduser(settings));
-//app.post('/updatepassword', routes.post_updatepassword(passport));
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());
 app.post('/updatescope', ensureAuthenticated, routes.updatescope());
-//app.post('/deletescope', ensureAuthenticated, routes.deletescope());
 
 
 http.createServer(app).listen(app.get('port'), function(){
