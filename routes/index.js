@@ -158,11 +158,16 @@ exports.updatescope = function () {
         Scope.findOne({serial: req.body.serial}).exec(
             function (err, doc) {
                 if (!!doc) {
-                    doc.assignment = req.body.assignment || "";
-                    doc.priority = req.body.priority || "";
-                    doc.hospital = req.body.hospital || "";
-                    doc.rma = req.body.rma || "";
-                    doc.client = req.body.client || "";
+                    if (!!req.body.assignment)
+                        doc.assignment = req.body.assignment;
+                    if (!!req.body.priority)
+                        doc.priority = req.body.priority;
+                    if (!!req.body.hospital)
+                        doc.hospital = req.body.hospital;
+                    if (!!req.body.rma)
+                        doc.rma = req.body.rma;
+                    if (!!req.body.client)
+                        doc.client = req.body.client;
                     if (!!req.body.new_serial)
                         doc.serial = req.body.new_serial;
                     else if (!!req.body.serial)
