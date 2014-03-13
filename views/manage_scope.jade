@@ -15,14 +15,6 @@ block content
                 div
                     input(type="text" name="hospital" value=scope.hospital)
             div
-                div RMA
-                div
-                    input(type="text" name="rma" value=scope.rma)
-            div
-                div Client
-                div
-                    input(type="text" name="client" value=scope.client)
-            div
                 div Current Assignment
                 div
                     select(name='assignment')
@@ -47,24 +39,26 @@ block content
                 button(name="submit" value="Update Scope") Update Scope
                 div
 
+    div.panel.panel-primary
+        div.panel-heading.bg-primary
+            div.panel-title Scope History
 
-    div.tableContainer
-        h2.mainTableHeader Scope History
-        div.table
-            div.subTableHeader
-                div Serial
-                div Hospital
-                div RMA
-                div Client
-                div Assignment
-                div Priority
-                div Updated
-            each status in viewModel.scope.status
-                div
-                   div= status.serial
-                   div= status.hospital
-                   div= status.rma
-                   div= status.client
-                   div= viewModel.boardTypes[status.assignment]
-                   div= viewModel.priorityLevel[status.priority]
-                   div= status.updated_time
+        div.panel-body
+            table.table
+                tr.subTableHeader
+                    th Serial
+                    th Hospital
+                    th RMA
+                    th Client
+                    th Assignment
+                    th Priority
+                    th Updated
+                each status in viewModel.scope.status
+                    tr
+                       td= status.serial
+                       td= status.hospital
+                       td= status.rma
+                       td= status.client
+                       td= viewModel.boardTypes[status.assignment]
+                       td= viewModel.priorityLevel[status.priority]
+                       td= status.updated_time

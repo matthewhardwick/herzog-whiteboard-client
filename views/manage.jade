@@ -1,67 +1,93 @@
 extends layout
 block content
-    div(style="margin-left: auto; margin-right: auto;")
-        if (viewModel.message)
-            div.sessionMessage= viewModel.message
-        div.tableContainer
-            h2.mainTableHeader Manage scopes
-            div.table
 
-                div.subTableHeader
-                    div Serial
-                    div Hospital
-                    div Assignment
-                    div Priority
+
+
+    div.container-fluid(style="margin: 5px; margin-top: 20px;")
+        if (viewModel.message)
+            div.alert.alert-info= viewModel.message
+        div.panel.panel-primary
+            div.panel-heading.bg-primary
+                div.btn-group.btn-group-xs.pull-right
+                    button.btn.btn-default.btn-xs
+                        a(href="#addScope") Add Scope
+                    button.btn.btn-default.btn-xs
+                        a(href="/manage") View All Active
+
+                    div.btn-group
+                        button.btn.btn-default.dropdown-toggle.btn-xs(data-toggle="dropdown" role="menu") Filter Priority&nbsp;
+                            span.caret
+                        ul.dropdown-menu.pull-right
+                            each type in Object.keys(viewModel.assignment)
+                                li
+                                   a(href="/manage?filter=" + viewModel.assignment[type])= viewModel.assignment[type]
+
+                div.panel-title
+                    span Manage scopes
+                    if (!!viewModel.filterBy)
+                        span= " - " + viewModel.filterBy
+
+
+
+            table.table.table-responsive.table-hover.panel-body
+
+                tr
+                    th Serial
+                    th Hospital
+                    th Assignment
+                    th Priority
                 each item in viewModel.scopes
-                    div
-                        div
+                    tr
+                        td
                             a(href="/manage/scope/" + item.serial)=item.serial
-                        div= item.hospital
-                        form(action="/updatescope" method="post")
-                            input(type="hidden" name="serial" value=item.serial)
-                            select(name='assignment' onchange="this.form.submit()")
-                                each assignKey in Object.keys(viewModel.assignment)
-                                    if (assignKey === item.assignment)
-                                        option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
-                                    else
-                                        option(value=assignKey)= viewModel.assignment[assignKey]
-                        form(action='/updatescope' method='post')
-                            input(type="hidden" name="serial" value=item.serial)
-                            select(name="priority" onchange="this.form.submit()")
-                                each level in Object.keys(viewModel.priorityLevel)
-                                    if (level === item.priority)
-                                        option(value=level selected="selected")= viewModel.priorityLevel[level]
-                                    else
-                                        option(value=level)= viewModel.priorityLevel[level]
-        if (!viewModel.inactive)
-            div(style="width: 400px; margin: auto; margin-bottom: 25px;")
-                h2.mainTableHeader Add a new scope
-                form(method="post" action="/addscope").table
-                    div.loginRow
-                        label Serial
-                        input(type="text" name="serial")
-                    div.loginRow
-                        label Hospital
-                        input(type="text" name="hospital")
-                    div.loginRow
-                        label RMA
-                        input(type="text" name="rma")
-                    div.loginRow
-                        label Client
-                        input(type="text" name="client")
-                    div.loginRow
-                        label Assignment
-                        select(name='assignment')
-                            each assignKey in Object.keys(viewModel.assignment)
-                                option(value=assignKey)= viewModel.assignment[assignKey]
-                    div.loginRow
-                        label Priority
-                        select(name="priority")
-                            each pri in Object.keys(viewModel.priorityLevel)
-                                if (pri === "norm")
-                                    option(value=pri selected='selected')= viewModel.priorityLevel[pri]
-                                else
-                                    option(value=pri)= viewModel.priorityLevel[pri]
-                    div.loginRow
-                        input.button(type="submit" value="Add Scope")
+                        td= item.hospital
+                        td
+                            form(action="/updatescope" method="post")
+                                input(type="hidden" name="serial" value=item.serial)
+                                select.form-control.input-sm(name='assignment' onchange="this.form.submit()")
+                                    each assignKey in Object.keys(viewModel.assignment)
+                                        if (assignKey === item.assignment)
+                                            option(value=assignKey selected="selected")= viewModel.assignment[assignKey]
+                                        else
+                                            option(value=assignKey)= viewModel.assignment[assignKey]
+                        td
+                            form(action='/updatescope' method='post')
+                                input(type="hidden" name="serial" value=item.serial)
+                                select.form-control.input-sm(name="priority" onchange="this.form.submit()")
+                                    each level in Object.keys(viewModel.priorityLevel)
+                                        if (level === item.priority)
+                                            option(value=level selected="selected")= viewModel.priorityLevel[level]
+                                        else
+                                            option(value=level)= viewModel.priorityLevel[level]
+
+
+        div.col-sm-4.col-sm-offset-4#addScope
+            div.panel.panel-primary
+                div.panel-heading
+                    div.panel-title Add a new scope
+                form.form-horizontal.panel-body(method="post" action="/addscope" role="form")
+                    div.form-group.form-inline
+                        label.col-sm-4.control-label Serial
                         div
+                            input.form-control(type="text" name="serial")
+                    div.form-group
+                        label.col-sm-4.control-label Hospital
+                        div.form-inline
+                            input.form-control(type="text" name="hospital")
+                    div.form-group
+                        label.col-sm-4.control-label Assignment
+                        div.form-inline
+                            select.form-control(name='assignment')
+                                each assignKey in Object.keys(viewModel.assignment)
+                                    option(value=assignKey)= viewModel.assignment[assignKey]
+                    div.form-group
+                        label.col-sm-4.control-label Priority
+                        div.form-inline
+                            select.form-control(name="priority")
+                                each pri in Object.keys(viewModel.priorityLevel)
+                                    if (pri === "norm")
+                                        option(value=pri selected='selected')= viewModel.priorityLevel[pri]
+                                    else
+                                        option(value=pri)= viewModel.priorityLevel[pri]
+                    div
+                        input.btn.btn-primary(type="submit" value="Add Scope")

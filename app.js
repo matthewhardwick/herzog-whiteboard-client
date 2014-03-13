@@ -133,6 +133,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
+    app.locals.pretty = true;
 }
 
 var mongoUri = process.env.MONGOLAB_URI ||

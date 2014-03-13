@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var moment = require('moment');
+var underscore = require('underscore');
 
 var Scope = mongoose.model('Scope');
 var User = mongoose.model('User');
@@ -131,11 +132,14 @@ exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
             assignment: boardTypes,
             priorityLevel: priorityLevel,
             inactive: inactive,
-            message: req.session.messages
+            message: req.session.messages,
+            filterBy: req.query.filter
         }
         req.session.messages = "";
-        if (!inactive)
-            Scope.find({assignment: {$ne: 'na'}}, {}, function (e, docs) {
+        if (!!req.query.filter)
+            var key = underscore.invert(boardTypes)[req.query.filter];
+        if (!!key)
+            Scope.find({assignment: key}, {}, function (e, docs) {
                 viewModel.scopes = docs;
                 sortByKey(viewModel.scopes, "serial");
                 res.render('manage', {
@@ -143,7 +147,7 @@ exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
                 })
             });
         else
-            Scope.find({assignment: "na" }, {}, function (e, docs) {
+            Scope.find({assignment: {$ne: 'na'}}, {}, function (e, docs) {
                 viewModel.scopes = docs;
                 sortByKey(viewModel.scopes, "serial");
                 res.render('manage', {
@@ -164,10 +168,6 @@ exports.updatescope = function () {
                         doc.priority = req.body.priority;
                     if (!!req.body.hospital)
                         doc.hospital = req.body.hospital;
-                    if (!!req.body.rma)
-                        doc.rma = req.body.rma;
-                    if (!!req.body.client)
-                        doc.client = req.body.client;
                     if (!!req.body.new_serial)
                         doc.serial = req.body.new_serial;
                     else if (!!req.body.serial)
@@ -176,8 +176,6 @@ exports.updatescope = function () {
                     doc.status.push({
                         hospital    : doc.hospital || "",
                         serial      : doc.serial || "",
-                        rma         : doc.rma || "",
-                        client      : doc.client || "",
                         assignment  : doc.assignment || "",
                         priority    : doc.priority || "",
                         updated     : Date.now()
@@ -234,7 +232,7 @@ exports.manage_scope = function(settings, boardTypes, priorityLevel) {
 function sortByKey(array, key) {
     return array.sort(function(a, b) {
         var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        return ((x.toUpperCase() < y.toUpperCase()) ? -1 : ((x.toUpperCase() > y.toUpperCase()) ? 1 : 0));
     });
 };
 

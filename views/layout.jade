@@ -1,20 +1,36 @@
 doctype html
-html
+html(lang='en')
   head
+    meta(charset='utf-8')
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-      div
-          div#navBar
-            img.logo(src='/images/HerzogLogoShadow.png')
-            br
-            - if (!hideNav)
-                a(href='/whiteboard') Whiteboard
-                a(href='/manage') Manage
-                a(href='/manage/inactive') Inactive Scopes
-                - if (!!viewModel && !!viewModel.settings && !!viewModel.settings.isAdminMode)
-                    a(href='/adduser') Add User
-                a(href='/logout') Logout
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
+    script(src='/javascripts/jquery-1.11.0.min.js')
+    script(src='/javascripts/bootstrap.min.js')
 
-          div#content
-            block content
+  body
+      div.container-fluid
+          div.row
+              div.col-md-2
+
+                div.row(style="margin: 5px; margin-top: 20px;")
+                  img.img-responsive(src='/images/HerzogLogoShadow.png' style="margin: 0 auto;")
+                div.row(style="margin: 5px; margin-top: 20px;")
+                  ul.nav.nav-stacked
+                    - if (!hideNav)
+                        li.text-center
+                            a(href='/whiteboard') Whiteboard
+                        li.text-center
+                            a(href='/manage') Manage
+                        li.text-center
+                            a(href='/manage/inactive') Inactive Scopes
+                        li.text-center
+                            a(href='/adduser') Add User
+                        li.text-center
+                            a(href='/logout') Logout
+
+              div.col-md-10
+                block content

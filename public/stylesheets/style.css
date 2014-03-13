@@ -1,5 +1,5 @@
 
-/* Priority Scope Colors */
+ /*Priority Scope Colors */
 .scope-item .priority.norm {
     background-color: green;
 }
@@ -12,68 +12,12 @@
     background-color: dodgerblue;
 }
 
-/* App Styles Beging */
+ /*App Styles Beging */
 html,body {
     height: 100%;
     width: 100%;
     margin: 0;
     font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-/*.header {*/
-    /*flex: 60px 0 0;*/
-/*}*/
-
-/*.header img {*/
-    /*margin: 2.5px;*/
-/*}*/
-
-/*.header .nav {*/
-    /*float: right;*/
-    /*height: 100%;*/
-    /*display: table;*/
-    /*margin-right: 10px;*/
-/*}*/
-
-/*.header .nav .links {*/
-    /*display: table-cell;*/
-    /*vertical-align: middle;*/
-/*}*/
-
-#navBar {
-    background-color: ghostwhite;
-    width: 220px;
-    float: left;
-    height: 100vh;
-    display: inline-block;
-    position: fixed;
-}
-
-#content {
-    width: calc( 100% - 220px );
-    display: inline-block;
-    margin-left: 220px;
-}
-
-#navBar .logo {
-    width: 200px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-#navBar a {
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    color: #23689c;
-    margin-top: 10px;
-}
-
-.content {
-    height: calc(100% - 60px);
-    flex: 1 0 0;
 }
 
 .whiteboard {
@@ -124,7 +68,7 @@ html,body {
     background-color: #23689c;
     border-bottom: solid 1px black;
     padding: 3px;
-    font-size: 14px;
+    font-size: 20px;
     color: white;
 }
 
@@ -135,7 +79,7 @@ html,body {
 
 .scope-item {
     width: calc(50% - 4px);
-    height: 28px;
+    height: 40px;
     background-color: #F5F5F5;
     color: black;
     padding-top: 1px;
@@ -158,7 +102,7 @@ html,body {
     width: calc(100% - 18px);
 }
 .scope-item .serial {
-    font-size: 12px;
+    font-size: 18px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -169,11 +113,11 @@ html,body {
     float: left;
     display: inline-block;
     width: 10px;
-    height: 28px;
+    height: 35px;
 }
 
 .scope-item .hospital {
-    font-size: 10px;
+    font-size: 16px;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -185,85 +129,85 @@ html,body {
 }
 
 
-.tableContainer {
-    width: 700px;
-    margin-right: auto;
-    margin-left: auto;
-}
+/*.tableContainer {*/
+    /*width: 700px;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+/*}*/
 
-.table {
-    display: table;
-    margin-right: 0;
-    margin-left: 0;
-    width: 100%;
-}
+/*.table {*/
+    /*display: table;*/
+    /*margin-right: 0;*/
+    /*margin-left: 0;*/
+    /*width: 100%;*/
+/*}*/
 
-.mainTableHeader {
-    background-color: #23689c;
-    margin-bottom: 0;
-    padding: 5px;
-    color: white;
+/*.mainTableHeader {*/
+    /*background-color: #23689c;*/
+    /*margin-bottom: 0;*/
+    /*padding: 5px;*/
+    /*color: white;*/
 
-}
+/*}*/
 
-.table .subTableHeader#updateSubmit {
-    background-color: #4F86B0;
-}
+/*.table .subTableHeader#updateSubmit {*/
+    /*background-color: #4F86B0;*/
+/*}*/
 
-.table .subTableHeader {
-    text-align: center;
-    background-color: #4F86B0;
-    border-bottom: solid 1px black;
-    font-size: 18px;
-    color: white;
-    width: 100%;
-    margin-left: 0;
+/*.table .subTableHeader {*/
+    /*text-align: center;*/
+    /*background-color: #4F86B0;*/
+    /*border-bottom: solid 1px black;*/
+    /*font-size: 18px;*/
+    /*color: white;*/
+    /*width: 100%;*/
+    /*margin-left: 0;*/
 
-}
+/*}*/
 
-.table > *:nth-child(even) {
-    background-color: #c4d3df;
-}
+/*.table > *:nth-child(even) {*/
+    /*background-color: #c4d3df;*/
+/*}*/
 
-.table > * {
-    display: table-row;
-}
+/*.table > * {*/
+    /*display: table-row;*/
+/*}*/
 
-.table > * > * {
-    padding-left: 15px;
-    padding-right: 15px;
-    display: table-cell;
-    margin-left: 10px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    text-align: center;
-}
+/*.table > * > * {*/
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
+    /*display: table-cell;*/
+    /*margin-left: 10px;*/
+    /*padding-bottom: 2px;*/
+    /*padding-top: 2px;*/
+    /*text-align: center;*/
+/*}*/
 
-.sessionMessage {
-    white-space: nowrap;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    background-color: lightgoldenrodyellow;
-    padding: 5px;
-    border: black 1px solid;
-}
+/*.sessionMessage {*/
+    /*white-space: nowrap;*/
+    /*width: 700px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*font-size: 14px;*/
+    /*text-align: center;*/
+    /*margin-top: 15px;*/
+    /*margin-bottom: 15px;*/
+    /*background-color: lightgoldenrodyellow;*/
+    /*padding: 5px;*/
+    /*border: black 1px solid;*/
+/*}*/
 
-.table .loginRow {
-    background-color: #c4d3df;
-    text-align: left;
-}
+/*.table .loginRow {*/
+    /*background-color: #c4d3df;*/
+    /*text-align: left;*/
+/*}*/
 
-.table .loginRow > input {
-    width: 200px;
-    text-align: left;
-}
+/*.table .loginRow > input {*/
+    /*width: 200px;*/
+    /*text-align: left;*/
+/*}*/
 
-.table .loginRow > .button {
-    width: 100px;
-    text-align: center;
-}
+/*.table .loginRow > .button {*/
+    /*width: 100px;*/
+    /*text-align: center;*/
+/*}*/
