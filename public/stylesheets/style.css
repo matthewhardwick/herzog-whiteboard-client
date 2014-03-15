@@ -118,6 +118,7 @@ html,body {
 
 .scope-item .hospital {
     font-size: 16px;
+    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -128,6 +129,12 @@ html,body {
     align-content: flex-start;
 }
 
+
+ .flex-wrap {
+     display: flex;
+     flex-flow: column wrap;
+     align-content: flex-start;
+ }
 
 /*.tableContainer {*/
     /*width: 700px;*/
