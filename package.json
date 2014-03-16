@@ -20,7 +20,8 @@
     "sliced": "*",
     "mpath": "*",
     "hooks": "*",
-    "mpromise": "*"
+    "mpromise": "*",
+    "murl": "*"
   },
   "engines": {
     "node": "0.10.x"
