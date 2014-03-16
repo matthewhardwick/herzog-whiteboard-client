@@ -40,7 +40,7 @@ block content
                             label.col-sm-4.control-label Date Added
                             div.form-control-static= scope.date
                         div.checkbox.pull-right
-                            - if (scope.displayBySerial)
+                            - if (typeof scope.displayBySerial === 'undefined' || scope.displayBySerial)
                                 input(type="checkbox" name="displayBySerial" checked="checked")
                             - else
                                 input(type="checkbox" name="displayBySerial")
@@ -79,31 +79,29 @@ block content
                             th.col-sm-3 RMA
                             th.col-sm-1.text-center Display
                             th.col-sm-8 Description
-                        each rma in scope.rmas
-                            tr
-                                td
-                                    form.form-inline(method='post' action='/updaterma')
-                                        input(type='hidden' name='serial' value=scope.serial)
-                                        input(type='hidden' name='rma' value=rma.rma)
-                                        input.form-control(type='text' name='new_rma' value=rma.rma)
-                                        button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
-                                td.text-center
-                                    form(method='post' action='/updaterma' )
-                                        input(type="hidden" name="serial" value=scope.serial)
-                                        input(type="hidden" name="rma" value=rma.rma)
-                                        - if (scope.activeRma === rma.rma)
-                                            input.text-center(type="checkbox" name="displayByRma" checked="on" onclick="this.form.submit()")
-                                        - else
-                                            input.text-center(type="checkbox" name="displayByRma" onclick="this.form.submit()")
-                                td
-                                    form.form-inline(method='post' action='/updaterma')
-                                        input(type='hidden' name='serial' value=scope.serial)
-                                        input(type='hidden' name='rma' value=rma.rma)
-                                        input.form-control(style="width: calc(100% - 60px);" type='text' name='description' value=rma.description)
-                                        button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
-
-
-
+                        if (!!scope.rmas)
+                            each rma in scope.rmas
+                                tr
+                                    td
+                                        form.form-inline(method='post' action='/updaterma')
+                                            input(type='hidden' name='serial' value=scope.serial)
+                                            input(type='hidden' name='rma' value=rma.rma)
+                                            input.form-control(type='text' name='new_rma' value=rma.rma)
+                                            button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
+                                    td.text-center
+                                        form(method='post' action='/updaterma' )
+                                            input(type="hidden" name="serial" value=scope.serial)
+                                            input(type="hidden" name="rma" value=rma.rma)
+                                            - if (scope.activeRma === rma.rma)
+                                                input.text-center(type="checkbox" name="displayByRma" checked="on" onclick="this.form.submit()")
+                                            - else
+                                                input.text-center(type="checkbox" name="displayByRma" onclick="this.form.submit()")
+                                    td
+                                        form.form-inline(method='post' action='/updaterma')
+                                            input(type='hidden' name='serial' value=scope.serial)
+                                            input(type='hidden' name='rma' value=rma.rma)
+                                            input.form-control(style="width: calc(100% - 60px);" type='text' name='description' value=rma.description)
+                                            button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
 
         div.row
             div.panel.panel-primary
@@ -122,6 +120,6 @@ block content
                             tr
                                td= status.serial
                                td= status.hospital
-                               td= viewModel.boardTypes[status.assignment]
+                               td= viewModel.boardTypes[status.assignment] || status.assignment
                                td= viewModel.priorityLevel[status.priority]
                                td= status.updated_time

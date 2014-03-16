@@ -7,8 +7,8 @@ var settings = {
     EmployeeNames: {
         emp1: "Luis",
         emp2: "Jeremy #2",
-        emp3: "Dan",
-        emp4: "Jeremy #1",
+        emp3: "Jeremy #1",
+        emp4: "Dan",
         emp5: "Emily / QC"
     }
 }
@@ -55,7 +55,7 @@ var scopeStatusSchema = new Schema({
 scopeRmaSchema = new Schema({
     serial          : { type: String, required: true },
     rma             : { type: String, unique: true },
-    description     : { type: String, required: true },
+    description     : { type: String },
     date            : { type: Date, required: true, default: Date.now() }
 });
 
@@ -74,7 +74,8 @@ var scopeSchema = new Schema({
 var userSchema = new Schema({
     username        : { type: String, required: true, unique: true },
     email           : { type: String, required: true, unique: true },
-    password        : { type: String, required: true }
+    password        : { type: String, required: true },
+    isAdmin         : { type: Boolean, required: true, default: false }
 });
 
 
@@ -202,7 +203,7 @@ app.get('/adduser', ensureAuthenticated, routes.get_adduser(settings));
 app.post('/adduser', ensureAuthenticated, routes.post_adduser(settings));
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());
-app.post('/updatescope', ensureAuthenticated, routes.updatescope());
+app.post('/updatescope', ensureAuthenticated, routes.updatescope(boardTypes));
 app.post('/addrma', ensureAuthenticated, routes.addrma());
 app.post('/updaterma', ensureAuthenticated, routes.updaterma());
 

@@ -5,6 +5,7 @@ var underscore = require('underscore');
 var Scope = mongoose.model('Scope');
 var User = mongoose.model('User');
 var ScopeRma = mongoose.model('ScopeRma');
+var ScopeStatus = mongoose.model( 'ScopeStatus' );
 
 exports.index = function(req, res){
     res.redirect('/manage');
@@ -106,13 +107,13 @@ exports.whiteboard = function(settings, boardTypes, priorityLevel) {
 exports.addscope = function () {
     return function (req, res) {
         var scope = new Scope(req.body);
-        scope.status.push({
+        scope.status.push(new ScopeStatus({
             hospital    : req.body.hospital || "",
             serial      : req.body.serial || "",
             assignment  : req.body.assignment || "",
             priority    : req.body.priority || "",
             updated     : Date.now()
-        });
+        }));
         scope.save(function(err) {
             if(err) {
                 console.log(err);
@@ -167,9 +168,11 @@ exports.addrma = function () {
                     serial: req.body.serial || ""
                 };
                 if (!!docs.rmas)
-                    docs.rmas.push(rma);
-                else
-                    docs.rmas = [ rma ];
+                    docs.rmas.push(new ScopeRma(rma));
+                else {
+                    docs.rmas = [ new ScopeRma(rma) ];
+                    docs.displayBySerial = true;
+                }
                 if (!!req.body.displayrma && req.body.displayrma) {
                     docs.displayBySerial =  false;
                     docs.activeRma = req.body.rma;
@@ -178,12 +181,13 @@ exports.addrma = function () {
                     if (err) {
                         console.log(err);
                         req.session.messages = "Unable to add RMA to " + req.body.serial;
+                        res.redirect(req.header('referer'));
                     } else {
                         console.log(docs);
                         req.session.messages = req.body.serial + " Sucessfully added";
                     }
 
-                    res.redirect('/manage');
+                    res.redirect(req.header('referer'));
 
                 })
             }
@@ -241,15 +245,15 @@ exports.updaterma = function () {
 
 
     });
-      //res.redirect('/manage/scope/' + req.body.serial);
   };
 };
 
-exports.updatescope = function () {
+exports.updatescope = function (boardTypes) {
     return function (req, res) {
         Scope.findOne({serial: req.body.serial}, {}, function (err, doc) {
 
                 if (!!doc) {
+                    var updatedDisplay = false;
                     if (!!req.body.assignment)
                         doc.assignment = req.body.assignment;
                     if (!!req.body.priority)
@@ -260,19 +264,20 @@ exports.updatescope = function () {
                         doc.serial = req.body.new_serial;
                     else if (!!req.body.serial)
                         doc.serial = req.body.serial;
-                    if (!!req.body.displayBySerial && req.body.displayBySerial) {
+                    if ((!!req.body.displayBySerial && req.body.displayBySerial) || typeof doc.displayBySerial === 'undefined') {
                         doc.displayBySerial = true;
                         doc.activeRma = "";
+                        updatedDisplay = true;
                     }
 
-                    if (!!req.body.displayBySerial && !req.body.displayBySerial)
-                        doc.status.push({
+                    if (!updatedDisplay)
+                        doc.status.push(new ScopeStatus({
                             hospital    : doc.hospital || "",
                             serial      : doc.serial || "",
-                            assignment  : doc.assignment || "",
+                            assignment  : boardTypes[doc.assignment] || "",
                             priority    : doc.priority || "",
                             updated     : Date.now()
-                        });
+                        }));
                     doc.save(function (err) {
                         if (err) {
                             console.log(err);
@@ -286,8 +291,6 @@ exports.updatescope = function () {
                             res.redirect('/manage/scope/' + req.body.new_serial);
                         else
                             res.redirect(req.header('referer'));
-
-
                     })
                 }
 
