@@ -17,7 +17,8 @@
     "logfmt": "~0.21.0",
     "underscore": "~1.6.0",
     "ms": "*",
-    "sliced": "*"
+    "sliced": "*",
+    "mpath": "*"
   },
   "engines": {
     "node": "0.10.x"
