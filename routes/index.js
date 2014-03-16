@@ -4,6 +4,7 @@ var underscore = require('underscore');
 
 var Scope = mongoose.model('Scope');
 var User = mongoose.model('User');
+var ScopeRma = mongoose.model('ScopeRma');
 
 exports.index = function(req, res){
     res.redirect('/manage');
@@ -108,14 +109,13 @@ exports.addscope = function () {
         scope.status.push({
             hospital    : req.body.hospital || "",
             serial      : req.body.serial || "",
-            rma         : req.body.rma || "",
-            client      : req.body.client || "",
             assignment  : req.body.assignment || "",
             priority    : req.body.priority || "",
             updated     : Date.now()
         });
         scope.save(function(err) {
             if(err) {
+                console.log(err);
                 req.session.messages = "Unable to add " + req.body.serial;
             } else {
                 req.session.messages = req.body.serial + " Sucessfully Added";
@@ -157,10 +157,98 @@ exports.manage = function (settings, boardTypes, priorityLevel, inactive) {
     }
 }
 
+exports.addrma = function () {
+    return function (req, res) {
+        Scope.findOne({serial: req.body.serial}, {}, function (e, docs) {
+            if (!!docs) {
+                var rma = {
+                    rma: req.body.rma || "",
+                    description: req.body.description || "",
+                    serial: req.body.serial || ""
+                };
+                if (!!docs.rmas)
+                    docs.rmas.push(rma);
+                else
+                    docs.rmas = [ rma ];
+                if (!!req.body.displayrma && req.body.displayrma) {
+                    docs.displayBySerial =  false;
+                    docs.activeRma = req.body.rma;
+                }
+                docs.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        req.session.messages = "Unable to add RMA to " + req.body.serial;
+                    } else {
+                        console.log(docs);
+                        req.session.messages = req.body.serial + " Sucessfully added";
+                    }
+
+                    res.redirect('/manage');
+
+                })
+            }
+        });
+    }
+};
+
+exports.updaterma = function () {
+  return function (req, res) {
+    console.log(req.body);
+    Scope.findOne({serial: req.body.serial}, {}, function (err, docs) {
+       if (!!docs) {
+           if ((!!req.body.new_rma || !!req.body.description) && !!docs.rmas ) {
+                Scope.findOne({'rmas.rma': req.body.rma}, { 'rmas.$': 1 }, function (err, scope) {
+                    if (!!err) {
+                        req.session.messages = "Unable to update RMA";
+                        res.redirect('/manage/scope/' + req.body.serial);
+                    } else if (!!scope && !!scope.rmas[0]) {
+                        var rma = scope.rmas[0];
+                        if (!!req.body.new_rma)
+                            rma.rma = req.body.new_rma;
+                        if (!!req.body.description)
+                            rma.description = req.body.description;
+
+                        scope.save(function (err) {
+                           if (!!err) {
+                               req.session.messages = "Unable to update RMA";
+                               res.redirect('/manage/scope/' + req.body.serial);
+                           } else {
+                               req.session.messages = "RMA updated";
+                               res.redirect('/manage/scope/' + req.body.serial);
+                           }
+                        });
+
+                    }
+                });
+           } else if (!!req.body.displayByRma) {
+               docs.activeRma = req.body.rma;
+               docs.displayBySerial = false;
+               docs.save(function (err) {
+                   if (!!err) {
+                       req.session.messages = "Unable to set RMA to Active RMA";
+                       res.redirect('/manage/scope/' + req.body.serial);
+                   } else {
+                       req.session.message = req.body.rma + " set to Display As RMA";
+                       res.redirect('/manage/scope/' + req.body.serial);
+                   }
+               });
+           }
+       }
+       if (!!err) {
+           res.redirect('/manage');
+       }
+
+
+
+    });
+      //res.redirect('/manage/scope/' + req.body.serial);
+  };
+};
+
 exports.updatescope = function () {
     return function (req, res) {
-        Scope.findOne({serial: req.body.serial}).exec(
-            function (err, doc) {
+        Scope.findOne({serial: req.body.serial}, {}, function (err, doc) {
+
                 if (!!doc) {
                     if (!!req.body.assignment)
                         doc.assignment = req.body.assignment;
@@ -172,14 +260,19 @@ exports.updatescope = function () {
                         doc.serial = req.body.new_serial;
                     else if (!!req.body.serial)
                         doc.serial = req.body.serial;
-                        
-                    doc.status.push({
-                        hospital    : doc.hospital || "",
-                        serial      : doc.serial || "",
-                        assignment  : doc.assignment || "",
-                        priority    : doc.priority || "",
-                        updated     : Date.now()
-                    });
+                    if (!!req.body.displayBySerial && req.body.displayBySerial) {
+                        doc.displayBySerial = true;
+                        doc.activeRma = "";
+                    }
+
+                    if (!!req.body.displayBySerial && !req.body.displayBySerial)
+                        doc.status.push({
+                            hospital    : doc.hospital || "",
+                            serial      : doc.serial || "",
+                            assignment  : doc.assignment || "",
+                            priority    : doc.priority || "",
+                            updated     : Date.now()
+                        });
                     doc.save(function (err) {
                         if (err) {
                             console.log(err);
@@ -189,9 +282,19 @@ exports.updatescope = function () {
                             req.session.messages = doc.serial + " Sucessfully Updated";
                         }
 
-                        res.redirect('/manage');
+                        if (!!req.body.new_serial)
+                            res.redirect('/manage/scope/' + req.body.new_serial);
+                        else
+                            res.redirect(req.header('referer'));
+
 
                     })
+                }
+
+                if (!!err) {
+                    console.log(err);
+                    req.session.messages = "Unable to update " + req.body.serial;
+                    res.redirect(req.header('referer'));
                 }
             }
         );
@@ -221,7 +324,7 @@ exports.manage_scope = function(settings, boardTypes, priorityLevel) {
                 });
             } else {
                 req.session.messages = "Unable to Find Scope: " + req.params.serial;
-                res.redirect('/manage');
+                res.redirect(req.header('referer'));
             }
         });
     }

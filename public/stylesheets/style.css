@@ -78,8 +78,8 @@ html,body {
 }
 
 .scope-item {
-    width: calc(50% - 4px);
-    height: 40px;
+    width: calc(100% - 8px);
+    height: 25px;
     background-color: #F5F5F5;
     color: black;
     padding-top: 1px;
@@ -90,19 +90,18 @@ html,body {
 }
 
 .flex-wrap-wide > .scope-item {
-    width: calc(25% - 4px);
+    width: calc(50% - 8px);
 
 }
 
 .scope-item .text-block {
     display: inline-block;
     margin-left: 15px;
-    text-overflow: ellipsis;
     overflow: hidden;
     width: calc(100% - 18px);
 }
 .scope-item .serial {
-    font-size: 18px;
+    font-size: 23px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -113,12 +112,11 @@ html,body {
     float: left;
     display: inline-block;
     width: 10px;
-    height: 40px;
+    height: 25px;
 }
 
 .scope-item .hospital {
-    font-size: 16px;
-    display: inline-block;
+    font-size: 23px;
     white-space: nowrap;
     overflow: hidden;
 }

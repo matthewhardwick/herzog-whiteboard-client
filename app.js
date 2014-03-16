@@ -43,30 +43,38 @@ var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
 var scopeStatusSchema = new Schema({
-    serial      : { type: String },
-    hospital    : { type: String },
-    rma         : { type: String },
-    client      : { type: String },
-    assignment  : { type: String, required: true },
-    priority    : { type: String, required: true },
-    updated     : { type: Date, required: true, default: Date.now() }
+    serial          : { type: String },
+    hospital        : { type: String },
+    rma             : { type: String },
+    client          : { type: String },
+    assignment      : { type: String, required: true },
+    priority        : { type: String, required: true },
+    updated         : { type: Date, required: true, default: Date.now() }
+});
+
+scopeRmaSchema = new Schema({
+    serial          : { type: String, required: true },
+    rma             : { type: String, unique: true },
+    description     : { type: String, required: true },
+    date            : { type: Date, required: true, default: Date.now() }
 });
 
 var scopeSchema = new Schema({
-    serial      : { type: String, required: true, unique: true },
-    hospital    : { type: String },
-    rma         : { type: String },
-    client      : { type: String },
-    assignment  : { type: String, required: true },
-    priority    : { type: String, required: true },
-    status      : [ scopeSchema ],
-    date        : { type: Date, required: true, default: Date.now() }
+    serial          : { type: String, required: true, unique: true },
+    hospital        : { type: String },
+    assignment      : { type: String, required: true },
+    priority        : { type: String, required: true },
+    status          : [ scopeStatusSchema ],
+    rmas            : [ scopeRmaSchema ],
+    displayBySerial : {type: Boolean, required: true },
+    activeRma       : { type: String },
+    date            : { type: Date, required: true, default: Date.now() }
 });
 
 var userSchema = new Schema({
-    username    : { type: String, required: true, unique: true },
-    email       : { type: String, required: true, unique: true },
-    password    : { type: String, required: true }
+    username        : { type: String, required: true, unique: true },
+    email           : { type: String, required: true, unique: true },
+    password        : { type: String, required: true }
 });
 
 
@@ -100,6 +108,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 var Scope = mongoose.model( 'Scope', scopeSchema );
 var User = mongoose.model( 'User', userSchema );
 var ScopeStatus = mongoose.model( 'ScopeStatus', scopeStatusSchema );
+var ScopeRma = mongoose.model( 'ScopeRma', scopeRmaSchema);
 
 
 /**
@@ -194,6 +203,8 @@ app.post('/adduser', ensureAuthenticated, routes.post_adduser(settings));
 app.post('/login', routes.post_login(passport));
 app.post('/addscope', ensureAuthenticated, routes.addscope());
 app.post('/updatescope', ensureAuthenticated, routes.updatescope());
+app.post('/addrma', ensureAuthenticated, routes.addrma());
+app.post('/updaterma', ensureAuthenticated, routes.updaterma());
 
 
 http.createServer(app).listen(app.get('port'), function(){

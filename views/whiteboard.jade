@@ -16,8 +16,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                         div.flex-col.flex-item-single
                             div.col-header#emp2= viewModel.boardTypes.emp2
                             div.col-body.border-left
@@ -25,8 +28,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                         div.flex-col.flex-item-single
                             div.col-header#emp3= viewModel.boardTypes.emp3
                             div.col-body.border-left
@@ -34,8 +40,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                         div.flex-col.flex-item-single
                             div.col-header#emp4= viewModel.boardTypes.emp4
                             div.col-body.border-left
@@ -43,8 +52,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                         div.flex-col.flex-item-single
                             div.col-header#emp5= viewModel.boardTypes.emp5
                             div.col-body.border-left
@@ -52,8 +64,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                     div.flex-row.flex-item-triple
                         div.flex-col.flex-item-double
                             div.flex-col.flex-item-single
@@ -64,31 +79,12 @@ html
                                             div.scope-item
                                                 div.priority(class=item.priority)
                                                 div.text-block
-                                                    div.serial=item.serial
-                                                    div.hospital=item.hospital
-                                    div.flex-row.flex-item-single
-                                        div#loaners.flex-col.flex-item-single
-                                            div.col-header= viewModel.boardTypes.loaners
-                                            - var loanerClass = "";
-                                            if (!viewModel.settings.ShowCreditHold)
-                                                - loanerClass = "flex-wrap-wide";
-                                            div.col-body(class=loanerClass)
-                                                each item in viewModel.loaners
-                                                    div.scope-item
-                                                        div.priority(class=item.priority)
-                                                        div.text-block
-                                                            div.serial=item.serial
-                                                            div.hospital=item.hospital
-                                        if (viewModel.settings.ShowCreditHold)
-                                            div#credithold.flex-col.flex-item-single
-                                                div.col-header= viewModel.boardTypes.credithold
-                                                div.col-body.border-left
-                                                    each item in viewModel.credithold
-                                                        div.scope-item
-                                                            div.priority(class=item.priority)
-                                                            div.text-block
-                                                                div.serial=item.serial
-                                                                div.hospital=item.hospital
+                                                    - if (!!item.activeRma)
+                                                        span.serial= item.activeRma
+                                                    - else
+                                                        span.serial=item.serial
+                                                    span.hospital= " " + item.hospital
+
 
                         div#rfw.flex-col.flex-item-single
                             div.col-header= viewModel.boardTypes.rfw
@@ -97,8 +93,11 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital
                         div.flex-col.flex-item-single
                             div#pr.flex-col.flex-item-double
                                 div.col-header= viewModel.boardTypes.pr
@@ -107,8 +106,11 @@ html
                                         div.scope-item
                                             div.priority(class=item.priority)
                                             div.text-block
-                                                div.serial=item.serial
-                                                div.hospital=item.hospital
+                                                - if (!!item.activeRma)
+                                                    span.serial= item.activeRma
+                                                - else
+                                                    span.serial=item.serial
+                                                span.hospital= " " + item.hospital
                             div#disassemble.flex-col.flex-item-double
                                 div.col-header= viewModel.boardTypes.disassemble
                                 div.col-body.border-left
@@ -116,8 +118,11 @@ html
                                         div.scope-item
                                             div.priority(class=item.priority)
                                             div.text-block
-                                                div.serial=item.serial
-                                                div.hospital=item.hospital
+                                                - if (!!item.activeRma)
+                                                    span.serial= item.activeRma
+                                                - else
+                                                    span.serial=item.serial
+                                                span.hospital= " " + item.hospital
                         div#an.flex-col.flex-item-single
                             div.col-header= viewModel.boardTypes.an
                             div.col-body.border-left.flex-wrap
@@ -125,5 +130,8 @@ html
                                     div.scope-item
                                         div.priority(class=item.priority)
                                         div.text-block
-                                            div.serial=item.serial
-                                            div.hospital=item.hospital
+                                            - if (!!item.activeRma)
+                                                span.serial= item.activeRma
+                                            - else
+                                                span.serial=item.serial
+                                            span.hospital= " " + item.hospital

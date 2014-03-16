@@ -2,72 +2,126 @@ extends layout
 block content
 
     - var scope = viewModel.scope;
-    div.row
-        div.col-sm-4
+    div.container-fluid(style="margin: 5px; margin-top: 20px;")
+        div.row
+            div.col-sm-5
+                div.panel.panel-primary
+                    div.panel-heading.bg-primary
+                        div.panel-title Scope Information
+                    form.form-horizontal.panel-body(method="post" action="/updatescope")
+                        div.form-group.form-inline
+                            label.col-sm-4.control-label Serial
+                            div
+                                input.form-control(type="text" name="new_serial" value=scope.serial)
+                                input.form-control(type="hidden" name="serial" value=scope.serial)
+                        div.form-group.form-inline
+                            label.col-sm-4.control-label Hospital
+                            div
+                                input.form-control(type="text" name="hospital" value=scope.hospital)
+                        div.form-group.form-inline
+                            label.col-sm-4.control-label Assignment
+                            div
+                                select.form-control(name='assignment')
+                                    each assignKey in Object.keys(viewModel.boardTypes)
+                                        if (assignKey === scope.assignment)
+                                            option(value=assignKey selected="selected")= viewModel.boardTypes[assignKey]
+                                        else
+                                            option(value=assignKey)= viewModel.boardTypes[assignKey]
+                        div.form-group.form-inline
+                            label.col-sm-4.control-label Priority
+                            div
+                                select.form-control(name="priority")
+                                    each level in Object.keys(viewModel.priorityLevel)
+                                        if (level === scope.priority)
+                                            option(value=level selected="selected")= viewModel.priorityLevel[level]
+                                        else
+                                            option(value=level)= viewModel.priorityLevel[level]
+                        div.form-group.form-inline
+                            label.col-sm-4.control-label Date Added
+                            div.form-control-static= scope.date
+                        div.checkbox.pull-right
+                            - if (scope.displayBySerial)
+                                input(type="checkbox" name="displayBySerial" checked="checked")
+                            - else
+                                input(type="checkbox" name="displayBySerial")
+                            label.control-label Display by Serial
+                        div
+                            button.btn.btn-primary(name="submit" value="Update Scope") Update Scope
+            div.col-sm-6
+                div.panel.panel-primary
+                    div.panel-heading.bg-primary
+                        div.panel-title Add RMA
+                    form.form-horizontal.panel-body(method="post" action="/addrma")
+                        div.form-group.form-inline
+                            label.col-sm-3.control-label RMA
+                            input.form-control(type="hidden" name="serial" value=scope.serial)
+                            div.col-sm-9
+                                input.form-control(type="text" name="rma")
+                        div.form-group.form-inline
+                            label.col-sm-3.control-label Description
+                            div.col-sm-9
+                                input.form-control(type="text" name="description" style="width: 100%;")
+                        div.checkbox.pull-right
+                            input(type="checkbox" name="displayrma")
+                            label.control-label Display by RMA
+                        div
+                            button.btn.btn-primary(name="submit" value="Add RMA") Add RMA
+
+
+
+        div.row
             div.panel.panel-primary
                 div.panel-heading.bg-primary
-                    div.panel-title Scope Information
-                form.form-horizontal.panel-body(method="post" action="/updatescope")
-                    div.form-group.form-inline
-                        label.col-sm-4.control-label Serial
-                        div
-                            input.form-control(type="text" name="new_serial" value=scope.serial)
-                            input.form-control(type="hidden" name="serial")
-                    div.form-group.form-inline
-                        label.col-sm-4.control-label Hospital
-                        div
-                            input.form-control(type="text" name="hospital" value=scope.hospital)
-                    div.form-group.form-inline
-                        label.col-sm-4.control-label Current Assignment
-                        div
-                            select.form-control(name='assignment')
-                                each assignKey in Object.keys(viewModel.boardTypes)
-                                    if (assignKey === scope.assignment)
-                                        option(value=assignKey selected="selected")= viewModel.boardTypes[assignKey]
-                                    else
-                                        option(value=assignKey)= viewModel.boardTypes[assignKey]
-                    div.form-group.form-inline
-                        label.col-sm-4.control-label Current Priority
-                        div
-                            select.form-control(name="priority")
-                                each level in Object.keys(viewModel.priorityLevel)
-                                    if (level === scope.priority)
-                                        option(value=level selected="selected")= viewModel.priorityLevel[level]
-                                    else
-                                        option(value=level)= viewModel.priorityLevel[level]
-                    div.form-group.form-inline
-                        label.col-sm-4.control-label Date Added
-                        div.form-control-static= scope.date
-                    div#updateSubmit
-                        button.btn.btn-primary(name="submit" value="Update Scope") Update Scope
-        div.col-sm-4
-            div.panel.panel-primary
-                div.panel-heading.bg-primary
-                    div.panel-title Add RMA
-                form.form-horizontal.panel-body(method="post" action="/updatescope")
-
-
-    div.row
-        div.panel.panel-primary
-            div.panel-heading.bg-primary
-                div.panel-title Scope History
-
-            div.panel-body
-                table.table
-                    tr.subTableHeader
-                        th Serial
-                        th Hospital
-                        th RMA
-                        th Client
-                        th Assignment
-                        th Priority
-                        th Updated
-                    each status in viewModel.scope.status
+                    div.panel-title RMA
+                div.panel-body
+                    table.table
                         tr
-                           td= status.serial
-                           td= status.hospital
-                           td= status.rma
-                           td= status.client
-                           td= viewModel.boardTypes[status.assignment]
-                           td= viewModel.priorityLevel[status.priority]
-                           td= status.updated_time
+                            th.col-sm-3 RMA
+                            th.col-sm-1.text-center Display
+                            th.col-sm-8 Description
+                        each rma in scope.rmas
+                            tr
+                                td
+                                    form.form-inline(method='post' action='/updaterma')
+                                        input(type='hidden' name='serial' value=scope.serial)
+                                        input(type='hidden' name='rma' value=rma.rma)
+                                        input.form-control(type='text' name='new_rma' value=rma.rma)
+                                        button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
+                                td.text-center
+                                    form(method='post' action='/updaterma' )
+                                        input(type="hidden" name="serial" value=scope.serial)
+                                        input(type="hidden" name="rma" value=rma.rma)
+                                        - if (scope.activeRma === rma.rma)
+                                            input.text-center(type="checkbox" name="displayByRma" checked="on" onclick="this.form.submit()")
+                                        - else
+                                            input.text-center(type="checkbox" name="displayByRma" onclick="this.form.submit()")
+                                td
+                                    form.form-inline(method='post' action='/updaterma')
+                                        input(type='hidden' name='serial' value=scope.serial)
+                                        input(type='hidden' name='rma' value=rma.rma)
+                                        input.form-control(style="width: calc(100% - 60px);" type='text' name='description' value=rma.description)
+                                        button.btn.btn-primary.btn-xs(name='submit' value='Update') Update
+
+
+
+
+        div.row
+            div.panel.panel-primary
+                div.panel-heading.bg-primary
+                    div.panel-title Scope History
+
+                div.panel-body
+                    table.table
+                        tr.subTableHeader
+                            th Serial
+                            th Hospital
+                            th Assignment
+                            th Priority
+                            th Updated
+                        each status in viewModel.scope.status
+                            tr
+                               td= status.serial
+                               td= status.hospital
+                               td= viewModel.boardTypes[status.assignment]
+                               td= viewModel.priorityLevel[status.priority]
+                               td= status.updated_time

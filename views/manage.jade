@@ -1,8 +1,6 @@
 extends layout
 block content
 
-
-
     div.container-fluid(style="margin: 5px; margin-top: 20px;")
         if (viewModel.message)
             div.alert.alert-info= viewModel.message
@@ -13,7 +11,6 @@ block content
                         a(href="#addScope") Add Scope
                     button.btn.btn-default.btn-xs
                         a(href="/manage") View All Active
-
                     div.btn-group
                         button.btn.btn-default.dropdown-toggle.btn-xs(data-toggle="dropdown" role="menu") Filter Priority&nbsp;
                             span.caret
@@ -21,16 +18,12 @@ block content
                             each type in Object.keys(viewModel.assignment)
                                 li
                                    a(href="/manage?filter=" + viewModel.assignment[type])= viewModel.assignment[type]
-
                 div.panel-title
                     span Manage scopes
                     if (!!viewModel.filterBy)
                         span= " - " + viewModel.filterBy
 
-
-
             table.table.table-responsive.table-hover.panel-body
-
                 tr
                     th Serial
                     th Hospital
@@ -89,5 +82,9 @@ block content
                                         option(value=pri selected='selected')= viewModel.priorityLevel[pri]
                                     else
                                         option(value=pri)= viewModel.priorityLevel[pri]
+
+                    input(type="hidden" name="displayBySerial" value="True")
                     div
                         input.btn.btn-primary(type="submit" value="Add Scope")
+
+
