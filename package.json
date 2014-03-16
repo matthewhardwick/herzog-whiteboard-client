@@ -21,7 +21,8 @@
     "mpath": "*",
     "hooks": "*",
     "mpromise": "*",
-    "murl": "*"
+    "murl": "*",
+      "muri": "*"
   },
   "engines": {
     "node": "0.10.x"

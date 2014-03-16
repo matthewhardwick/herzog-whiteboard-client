@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0b0686fe-5166-45b5-819f-819ae41130a2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="herzog-status.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,7 +82,7 @@
       <file leaf-file-name="package.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="15" selection-start="469" selection-end="469" vertical-scroll-proportion="0.72938687" vertical-offset="0" max-vertical-offset="525">
+            <state line="24" column="16" selection-start="487" selection-end="487" vertical-scroll-proportion="0.76109934" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
@@ -758,7 +757,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="15" selection-start="469" selection-end="469" vertical-scroll-proportion="0.72938687" vertical-offset="0" max-vertical-offset="525">
+        <state line="24" column="16" selection-start="487" selection-end="487" vertical-scroll-proportion="0.76109934" vertical-offset="0" max-vertical-offset="540">
           <folding />
         </state>
       </provider>
