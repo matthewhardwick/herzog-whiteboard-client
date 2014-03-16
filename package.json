@@ -19,7 +19,8 @@
     "ms": "*",
     "sliced": "*",
     "mpath": "*",
-    "hooks": "*"
+    "hooks": "*",
+    "mpromise": "*"
   },
   "engines": {
     "node": "0.10.x"
