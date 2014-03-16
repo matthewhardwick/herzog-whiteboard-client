@@ -18,7 +18,8 @@
     "underscore": "~1.6.0",
     "ms": "*",
     "sliced": "*",
-    "mpath": "*"
+    "mpath": "*",
+    "hooks": "*"
   },
   "engines": {
     "node": "0.10.x"
