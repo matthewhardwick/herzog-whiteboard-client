@@ -12,6 +12,7 @@
     "passport-local": "*",
     "bcrypt": "*",
     "mongoose": "*",
+    "mongodb": "*",
     "moment": "~2.5.1",
     "logfmt": "~0.21.0",
     "underscore": "~1.6.0"
