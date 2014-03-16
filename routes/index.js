@@ -32,11 +32,12 @@ exports.post_adduser = function (settings) {
         if (!!req.body.username && !!req.body.password && !!req.body.email && settings.isAdminMode) {
             var user = new User({
                 username: req.body.username,
-                email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                email:    req.body.email,
+                isAdmin: true
             });
             user.save(function(err) {
-                if(err) {
+                if(!!err) {
                     console.log(err);
                     req.session.messages = 'Unable to create user: ' + user.username;
                 } else {
@@ -53,14 +54,21 @@ exports.post_adduser = function (settings) {
     };
 };
 
-exports.get_adduser = function (settings) {
+exports.get_manageuser = function (settings) {
     return function(req, res) {
-        if (settings.isAdminMode) {
-            res.render('adduser', {});
-        } else {
-            req.session.messages = "Not Admin.";
-            res.redirect('/manage');
-        }
+        var viewModel = {};
+
+        User.find({}, {}, function (err, docs) {
+            if(!!docs) {
+                viewModel.users = docs;
+                res.render('manage_user', { viewModel: viewModel });
+            }
+            if(!!err) {
+                console.log(err);
+                res.redirect('/manage/user');
+                res.session.messages = "Unable to get User List";
+            }
+        });
     };
 };
 
@@ -332,6 +340,26 @@ exports.manage_scope = function(settings, boardTypes, priorityLevel) {
         });
     }
 }
+
+exports.post_deleteuser = function () {
+    return function (req, res) {
+        if (req.body.username !== req.user.username)
+            User.remove({username: req.body.username}, function (err) {
+                if (!!err) {
+                    req.session.messages = "Unable to Delete " + req.body.username;
+                    res.redirect('/manage/user');
+                } else {
+                    req.session.messages = "Deleted: " + req.body.username;
+                    res.redirect(req.header('referer'));
+                }
+            });
+        else {
+            req.session.messages = "Unable to Delete Currently Logged In User";
+            res.redirect(req.header('referer'));
+        }
+
+    }
+};
 
 // Utility
 

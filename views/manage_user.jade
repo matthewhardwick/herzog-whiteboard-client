@@ -1,0 +1,40 @@
+extends layout
+block content
+
+    div.row
+        div.panel.panel-primary
+            div.panel-heading.bg-primary
+                div.panel-title Users
+            div.panel-body
+                table.table
+                    tr
+                        th Username
+                        th Delete
+                    each user in viewModel.users
+                        tr
+                            td= user.username
+                            td
+                                form(method='post' action='/deleteuser')
+                                    input(type='hidden' name='username' value=user.username)
+                                    input.btn.btn-primary(type="submit" value="Delete")
+
+
+    div.row
+        div.panel.panel-primary
+            div.panel-heading.bg-primary
+                div.panel-title Add a new user
+            div.panel-body
+                form.form(method="post" action="/adduser")
+                    div.loginRow
+                        label Login
+                        input(type="text" name="username")
+                    div.loginRow
+                        label Password
+                        input(type="password" name="password")
+                    div.loginRow
+                        label Email
+                        input(type="email" name="email")
+                    div.loginRow
+                        input.button(type="submit" value="Add User")
+                        div
+

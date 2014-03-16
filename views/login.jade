@@ -1,17 +1,19 @@
 extends layout
 block content
 
-
-    div(style="width: 400px; margin: auto;")
-        h2.mainTableHeader Login
-        form(method="post" action="/login").table
-            div.loginRow
-                label Login
-                input(type="text" name="username")
-
-            div.loginRow
-                label Password
-                input(type="password" name="password")
-            div.loginRow
-                input.button(type="submit" value="Login")
-                div
+        div.col-sm-3.col-sm-offset-4(style="margin-top: 25px;")
+            div.panel.panel-default.panel-primary
+                div.panel-heading
+                    div.panel-title Login
+                div.panel-body
+                    form(method="post" action="/login")
+                        div.form-group.form-inline
+                            label.control-label Username
+                            div
+                                input.form-control(type="text" name="username")
+                        div.form-group.form-inline
+                            label.control-label Password
+                            div
+                                input.form-control(type="password" name="password")
+                        div.form-group
+                            input.btn.btn-primary(type="submit" value="Login")

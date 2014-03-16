@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b0686fe-5166-45b5-819f-819ae41130a2" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/views/adduser.jade" afterPath="$PROJECT_DIR$/views/manage_user.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/manage_scope.jade" afterPath="$PROJECT_DIR$/views/manage_scope.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/login.jade" afterPath="$PROJECT_DIR$/views/login.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/whiteboard.jade" afterPath="$PROJECT_DIR$/views/whiteboard.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="herzog-status.iws" />
@@ -31,7 +34,7 @@
       <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="168" column="18" selection-start="5282" selection-end="5282" vertical-scroll-proportion="-96.92308" vertical-offset="0" max-vertical-offset="5460">
+            <state line="31" column="0" selection-start="941" selection-end="941" vertical-scroll-proportion="-5.3461537" vertical-offset="326" max-vertical-offset="5880">
               <folding />
             </state>
           </provider>
@@ -40,7 +43,7 @@
       <file leaf-file-name="whiteboard.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/whiteboard.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="65" selection-start="7562" selection-end="7562" vertical-scroll-proportion="-73.8" vertical-offset="0" max-vertical-offset="2145">
+            <state line="7" column="12" selection-start="153" selection-end="153" vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="2145">
               <folding />
             </state>
           </provider>
@@ -49,16 +52,7 @@
       <file leaf-file-name="manage_scope.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/manage_scope.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="0" selection-start="6516" selection-end="6516" vertical-scroll-proportion="-7.8" vertical-offset="1365" max-vertical-offset="1950">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="21" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.0" vertical-offset="1448" max-vertical-offset="3345">
+            <state line="105" column="0" selection-start="6517" selection-end="6727" vertical-scroll-proportion="-4.2" vertical-offset="1470" max-vertical-offset="1950">
               <folding />
             </state>
           </provider>
@@ -67,7 +61,7 @@
       <file leaf-file-name="manage.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/manage.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="32" selection-start="1655" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="1440">
+            <state line="37" column="32" selection-start="1655" selection-end="1659" vertical-scroll-proportion="6.32" vertical-offset="713" max-vertical-offset="1440">
               <folding />
             </state>
           </provider>
@@ -76,7 +70,7 @@
       <file leaf-file-name="layout.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="70" selection-start="1183" selection-end="1183" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="630">
+            <state line="28" column="48" selection-start="1161" selection-end="1161" vertical-scroll-proportion="-12.08" vertical-offset="118" max-vertical-offset="600">
               <folding />
             </state>
           </provider>
@@ -85,7 +79,16 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="18" selection-start="203" selection-end="203" vertical-scroll-proportion="0.30181086" vertical-offset="0" max-vertical-offset="3285">
+            <state line="3" column="18" selection-start="37" selection-end="37" vertical-scroll-proportion="0.101580136" vertical-offset="0" max-vertical-offset="3300">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage_user.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/manage_user.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="26" selection-start="376" selection-end="376" vertical-scroll-proportion="-7.8" vertical-offset="0" max-vertical-offset="690">
               <folding />
             </state>
           </provider>
@@ -108,14 +111,15 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/views/adduser.jade" />
-        <option value="$PROJECT_DIR$/views/login.jade" />
-        <option value="$PROJECT_DIR$/views/layout.jade" />
         <option value="$PROJECT_DIR$/views/manage.jade" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
-        <option value="$PROJECT_DIR$/views/whiteboard.jade" />
         <option value="$PROJECT_DIR$/views/manage_scope.jade" />
+        <option value="$PROJECT_DIR$/views/layout.jade" />
+        <option value="$PROJECT_DIR$/views/login.jade" />
+        <option value="$PROJECT_DIR$/views/manage_user.jade" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/views/whiteboard.jade" />
       </list>
     </option>
   </component>
@@ -398,11 +402,11 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3286445" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286445" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992327" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22551093" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39769822" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39769822" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32225063" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -450,7 +454,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="37" />
+      <option name="time" value="40" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -598,7 +602,7 @@
         <state line="4" column="0" selection-start="31" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="330" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/adduser.jade">
+    <entry file="file://$PROJECT_DIR$/views/manage_user.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="58" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="360" />
       </provider>
@@ -661,43 +665,14 @@
         <state line="0" column="16" selection-start="16" selection-end="16" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="474" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/adduser.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="58" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="360" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="405" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="31" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="330" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="478" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="169" column="0" selection-start="3733" selection-end="3733" vertical-scroll-proportion="0.49336872" vertical-offset="2163" max-vertical-offset="4905" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="70" selection-start="1183" selection-end="1183" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/manage.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="32" selection-start="1655" selection-end="1659" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="1440">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/query.js">
@@ -714,35 +689,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="21" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.0" vertical-offset="1448" max-vertical-offset="3345">
+        <state line="120" column="21" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.79458237" vertical-offset="1448" max-vertical-offset="3345">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/whiteboard.jade">
+    <entry file="file://$PROJECT_DIR$/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="65" selection-start="7562" selection-end="7562" vertical-scroll-proportion="-73.8" vertical-offset="0" max-vertical-offset="2145">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/login.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="61" selection-start="91" selection-end="91" vertical-scroll-proportion="0.1076555" vertical-offset="0" max-vertical-offset="418">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="48" selection-start="1161" selection-end="1161" vertical-scroll-proportion="-12.08" vertical-offset="118" max-vertical-offset="600">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/manage.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="32" selection-start="1655" selection-end="1659" vertical-scroll-proportion="6.32" vertical-offset="713" max-vertical-offset="1440">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/manage_scope.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="0" selection-start="6516" selection-end="6516" vertical-scroll-proportion="-7.8" vertical-offset="1365" max-vertical-offset="1950">
+        <state line="105" column="0" selection-start="6517" selection-end="6727" vertical-scroll-proportion="-4.2" vertical-offset="1470" max-vertical-offset="1950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/manage_user.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="26" selection-start="376" selection-end="376" vertical-scroll-proportion="-7.8" vertical-offset="0" max-vertical-offset="690">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/whiteboard.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="153" selection-end="153" vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="2145">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="18" selection-start="5282" selection-end="5282" vertical-scroll-proportion="-96.92308" vertical-offset="0" max-vertical-offset="5460">
+        <state line="31" column="0" selection-start="941" selection-end="941" vertical-scroll-proportion="-5.3461537" vertical-offset="326" max-vertical-offset="5880">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="18" selection-start="203" selection-end="203" vertical-scroll-proportion="0.30181086" vertical-offset="0" max-vertical-offset="3285">
+        <state line="3" column="18" selection-start="37" selection-end="37" vertical-scroll-proportion="0.101580136" vertical-offset="0" max-vertical-offset="3300">
           <folding />
         </state>
       </provider>

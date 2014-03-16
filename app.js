@@ -73,9 +73,9 @@ var scopeSchema = new Schema({
 
 var userSchema = new Schema({
     username        : { type: String, required: true, unique: true },
-    email           : { type: String, required: true, unique: true },
     password        : { type: String, required: true },
-    isAdmin         : { type: Boolean, required: true, default: false }
+    email           : { type: String, required: true },
+    isAdmin         : { type: Boolean, required: true, default: true }
 });
 
 
@@ -198,7 +198,7 @@ app.get('/manage', ensureAuthenticated, routes.manage(settings, boardTypes, prio
 app.get('/manage/inactive', ensureAuthenticated, routes.manage(settings, boardTypes, priorityLevel, true));
 app.get('/manage/scope/:serial', ensureAuthenticated, routes.manage_scope(settings, boardTypes, priorityLevel));
 app.get('/logout', ensureAuthenticated, routes.get_logout);
-app.get('/adduser', ensureAuthenticated, routes.get_adduser(settings));
+app.get('/manage/user', ensureAuthenticated, routes.get_manageuser(settings));
 
 app.post('/adduser', ensureAuthenticated, routes.post_adduser(settings));
 app.post('/login', routes.post_login(passport));
@@ -206,6 +206,7 @@ app.post('/addscope', ensureAuthenticated, routes.addscope());
 app.post('/updatescope', ensureAuthenticated, routes.updatescope(boardTypes));
 app.post('/addrma', ensureAuthenticated, routes.addrma());
 app.post('/updaterma', ensureAuthenticated, routes.updaterma());
+app.post('/deleteuser', ensureAuthenticated, routes.post_deleteuser());
 
 
 http.createServer(app).listen(app.get('port'), function(){
