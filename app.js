@@ -54,7 +54,7 @@ var scopeStatusSchema = new Schema({
 
 scopeRmaSchema = new Schema({
     serial          : { type: String, required: true },
-    rma             : { type: String, unique: true },
+    rma             : { type: String },
     description     : { type: String },
     date            : { type: Date, required: true, default: Date.now() }
 });
